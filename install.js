@@ -20,13 +20,24 @@ function parseFolder(path) {
             fs.stat(currentPath, (err, stats) => {
                 if(err) return reject(err);
                 if(stats.isDirectory(currentPath))
-                    resolve(parseFolder(currentPath));
+                    parseFolder(currentPath).then(resolve);
                 else
                     resolve(new SourceFile(currentPath, stats));
             });
         });
     });
-    return Promise.all(files);
+    return new Promise((resolve, reject) => {
+        Promise.all(files).then(fileList => {
+            resolve(fileList.reduce((acc, curr) => {
+                if(Array.isArray(curr))
+                    return acc.concat(curr);
+                else {
+                    acc.push(curr);
+                    return acc;
+                }
+            }, []));
+        });
+    });
 }
 
 // Read all the src files, compress and save them to the build folder.
