@@ -48,7 +48,10 @@ class SourceFile {
         if (!fs.existsSync(destination)){
             fs.mkdirSync(destination);
         }
-        fs.writeFile(this.DestinationFilePath(), content);
+        fs.writeFile(this.DestinationFilePath(), content, err => {
+            if(err)
+                console.warn(err);
+        });
 
     }
     Compress(input) {
