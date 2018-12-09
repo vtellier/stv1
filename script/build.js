@@ -5,8 +5,6 @@ const rimraf     = require('rimraf');
 const fs         = require('fs');
 const SourceFile = require('./SourceFile');
 
-
-
 async function parseFolder(path) {
     var files = fs.readdirSync(path).map(curr => {
         return new Promise((resolve, reject) => {
@@ -41,21 +39,36 @@ async function parseFolder(path) {
 async function main() {
     dotenv.config();
 
-    // Read all the src files, compress and save them to the build folder.
     let files;
     try {
+        // Read all the src files, compress and save them to the build folder
         files = await parseFolder(process.env.SRC_PATH);
+
         console.log("Source files:", files.map(item => item.FilePath()));
         
+        // Clean and recreate the destination folder
         if (fs.existsSync(process.env.BIN_PATH)){
             console.log(`Going to remove the folder ${process.env.BIN_PATH}`);
             rimraf.sync(process.env.BIN_PATH);
         }
         fs.mkdirSync(process.env.BIN_PATH);
 
+        // Parse all the files, build them and write them to the destination folder
         console.log("Starting build");
-        files.forEach(file => {
-            file.Build();
+        var artifacts = files.map(file => file.Build());
+        artifacts = await Promise.all(artifacts);
+
+        artifacts.forEach(artifact => {
+            // Check if the path exists, create it otherwise
+            var destination = artifact.Path.split('/');
+            destination.pop();
+            destination = process.env.BIN_PATH + '/' + destination.join('/');
+            if (!fs.existsSync(destination)){
+                fs.mkdirSync(destination);
+            }
+            fs.writeFile(process.env.BIN_PATH + '/' + artifact.Path, artifact.Content, err => {
+                if(err) console.warn(err);
+            });
         });
     }
     catch (e) {

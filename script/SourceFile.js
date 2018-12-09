@@ -19,35 +19,32 @@ class SourceFile {
     FilePath() { return this.Path + '/' + this.Name + '.' + this.Extension; }
     SourceFilePath() { return process.env.SRC_PATH + '/' + this.FilePath(); }
     DestinationFilePath() {
-        if(this.Extension != 'html')
-            return process.env.BIN_PATH + '/' + this.FilePath();
-        else
-            return process.env.BIN_PATH + '/' + this.Path + '/' + this.Name;
+        if(this.Extension != 'html') return this.FilePath();
+        else                         return this.Path + '/' + this.Name;
     }
     async Build() {
-//        console.log(`Gonna build myself: ${this.Path} -> ${this.Name} -> ${this.Extension}`);
-
+        var artifact = {
+            MetaData: {}
+        };
         var raw = fs.readFileSync(this.SourceFilePath());
-        var content;
+
         if(this.Extension == 'html') {
-            content = await this.Compress(raw);
-            console.log(`Compression: ${raw.length} => ${content.length}`);
+            artifact.Content = await this.Compress(raw);
+            artifact.MetaData["Content-Type"] = "text/html; charset=UTF-8";
+            artifact.MetaData["Content-Encoding"] = "gzip";
+        }
+        else if(this.Extension == 'ico') {
+            artifact.MetaData["Content-Type"] = "image/x-icon";
+        }
+        else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
+            artifact.MetaData["Content-Type"] = "image/jpeg";
         }
         else
-            content = raw;
+            artifact.Content = raw;
+        artifact.Path = this.DestinationFilePath();
 
-        // Check if the path exists, create it otherwise
-        var destination = this.DestinationFilePath().split('/');
-        destination.pop();
-        destination = destination.join('/');
-        if (!fs.existsSync(destination)){
-            fs.mkdirSync(destination);
-        }
-        fs.writeFile(this.DestinationFilePath(), content, err => {
-            if(err)
-                console.warn(err);
-        });
 
+        return artifact;
     }
     Compress(input) {
         return new Promise((resolve, reject) => {
