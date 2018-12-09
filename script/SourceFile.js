@@ -16,11 +16,11 @@ class SourceFile {
             this.Extension = '';
         }
     }
-    FilePath() { return this.Path + '/' + this.Name + '.' + this.Extension; }
+    FilePath() { return (this.Path.length > 0 ? this.Path + '/' : '') + this.Name + '.' + this.Extension; }
     SourceFilePath() { return process.env.SRC_PATH + '/' + this.FilePath(); }
     DestinationFilePath() {
         if(this.Extension != 'html') return this.FilePath();
-        else                         return this.Path + '/' + this.Name;
+        else                         return (this.Path.length > 0 ? this.Path + '/' : '') + this.Name;
     }
     async Build() {
         var artifact = {
@@ -33,16 +33,17 @@ class SourceFile {
             artifact.MetaData["Content-Type"] = "text/html; charset=UTF-8";
             artifact.MetaData["Content-Encoding"] = "gzip";
         }
-        else if(this.Extension == 'ico') {
-            artifact.MetaData["Content-Type"] = "image/x-icon";
-        }
-        else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
-            artifact.MetaData["Content-Type"] = "image/jpeg";
-        }
-        else
-            artifact.Content = raw;
-        artifact.Path = this.DestinationFilePath();
+        else {
+            if(this.Extension == 'ico') {
+                artifact.MetaData["Content-Type"] = "image/x-icon";
+            }
+            else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
+                artifact.MetaData["Content-Type"] = "image/jpeg";
+            }
 
+            artifact.Content = raw;
+        }
+        artifact.Path = this.DestinationFilePath();
 
         return artifact;
     }

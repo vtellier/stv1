@@ -3,7 +3,10 @@
 const dotenv     = require('dotenv');
 const rimraf     = require('rimraf');
 const fs         = require('fs');
+const AWS        = require('aws-sdk');
 const SourceFile = require('./SourceFile');
+
+var s3 = new AWS.S3({apiVersion: '2006-03-01', region: 'eu-west-1'});
 
 async function parseFolder(path) {
     var files = fs.readdirSync(path).map(curr => {
@@ -58,6 +61,7 @@ async function main() {
         var artifacts = files.map(file => file.Build());
         artifacts = await Promise.all(artifacts);
 
+        // Saving a local copy of the artifacts
         artifacts.forEach(artifact => {
             // Check if the path exists, create it otherwise
             var destination = artifact.Path.split('/');
@@ -70,6 +74,38 @@ async function main() {
                 if(err) console.warn(err);
             });
         });
+
+        var s3Uploads = artifacts.map(artifact => {
+            return new Promise((resolve, reject) => {
+                console.log(artifact.Path, artifact.Content == undefined);
+                var params = {
+                    Bucket: process.env.S3_BUCKET,
+                    Key: artifact.Path,
+                    Body: artifact.Content
+                };
+                try {
+                    s3.upload(params, function(err, data) {
+                        if(err) reject({ artifact: artifact.Path, err });
+                        else resolve(data);
+                    });
+                }
+                catch(e) {
+                    reject({ artifact: artifact.Path, error: e });
+                }
+            });
+        });
+
+        //s3Uploads.forEach(async up => {
+        //    var result = await up;
+        //    console.log(result);
+        //});
+
+        // Wait for all the uploads to be done
+        await Promise.all(s3Uploads);
+        console.log(`All the uploads are done`);
+
+        // Assignement of meta-data in the S3 bucket
+        //var s3Metas = 
     }
     catch (e) {
         console.error(`Shit happened:`, e);
