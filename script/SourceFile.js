@@ -28,6 +28,7 @@ class SourceFile {
         };
         var raw = fs.readFileSync(this.SourceFilePath());
 
+        artifact.MetaData["CacheControl"] = "max-age=2592000";
         if(this.Extension == 'html') {
             artifact.Content = await this.Compress(raw);
             artifact.MetaData["ContentType"] = "text/html; charset=UTF-8";
@@ -39,7 +40,7 @@ class SourceFile {
             }
             else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
                 artifact.MetaData["ContentType"] = "image/jpeg";
-                artifact.MetaData["CacheControl"] = "max-age=2592000";
+                artifact.MetaData["CacheControl"] = "max-age=31536000";
             }
 
             artifact.Content = raw;
