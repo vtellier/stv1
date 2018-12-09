@@ -31,7 +31,7 @@ class SourceFile {
         if(this.Extension == 'html') {
             artifact.Content = await this.Compress(raw);
             artifact.MetaData["ContentType"] = "text/html; charset=UTF-8";
-            artifact.MetaData["ContentEncoding"] = "gzip";
+            artifact.MetaData["ContentEncoding"] = "deflate";
         }
         else {
             if(this.Extension == 'ico') {
