@@ -30,15 +30,15 @@ class SourceFile {
 
         if(this.Extension == 'html') {
             artifact.Content = await this.Compress(raw);
-            artifact.MetaData["Content-Type"] = "text/html; charset=UTF-8";
-            artifact.MetaData["Content-Encoding"] = "gzip";
+            artifact.MetaData["ContentType"] = "text/html; charset=UTF-8";
+            artifact.MetaData["ContentEncoding"] = "gzip";
         }
         else {
             if(this.Extension == 'ico') {
-                artifact.MetaData["Content-Type"] = "image/x-icon";
+                artifact.MetaData["ContentType"] = "image/x-icon";
             }
             else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
-                artifact.MetaData["Content-Type"] = "image/jpeg";
+                artifact.MetaData["ContentType"] = "image/jpeg";
             }
 
             artifact.Content = raw;

@@ -78,11 +78,11 @@ async function main() {
         var s3Uploads = artifacts.map(artifact => {
             return new Promise((resolve, reject) => {
                 console.log(artifact.Path, artifact.Content == undefined);
-                var params = {
-                    Bucket: process.env.S3_BUCKET,
-                    Key: artifact.Path,
-                    Body: artifact.Content
-                };
+                var params = artifact.MetaData;
+                params['Bucket'] = process.env.S3_BUCKET;
+                params['Key'] = artifact.Path;
+                params['Body'] = artifact.Content;
+
                 try {
                     s3.upload(params, function(err, data) {
                         if(err) reject({ artifact: artifact.Path, err });
