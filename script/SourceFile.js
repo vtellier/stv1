@@ -39,10 +39,12 @@ class SourceFile {
             }
             else if(this.Extension == 'jpeg' || this.Extension == 'jpg') {
                 artifact.MetaData["ContentType"] = "image/jpeg";
+                artifact.MetaData["CacheControl"] = "max-age=2592000";
             }
 
             artifact.Content = raw;
         }
+        artifact.MetaData["ACL"] = "public-read";
         artifact.Path = this.DestinationFilePath();
 
         return artifact;
