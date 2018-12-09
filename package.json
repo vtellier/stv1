@@ -1,0 +1,27 @@
+{
+  "name": "steak-tartare",
+  "version": "1.0.0",
+  "description": "The best tartare receipes of the world!",
+  "main": "script/deploy.js",
+  "dependencies": {
+    "aws-sdk": "^2.373.0",
+    "dotenv": "^6.2.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node script/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtellier/steak-tartare.git"
+  },
+  "author": "Vincent Tellier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vtellier/steak-tartare/issues"
+  },
+  "homepage": "https://github.com/vtellier/steak-tartare#readme"
+}
