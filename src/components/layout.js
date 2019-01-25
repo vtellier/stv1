@@ -5,18 +5,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import './layout.css'
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
+
+const Layout = ({ children }) => {
+    let template = data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
@@ -35,9 +26,14 @@ const Layout = ({ children }) => (
           </footer>
         </div>
       </>
-    )}
-  />
-)
+    );
+    return (
+        <StaticQuery
+            query={graphql` query SiteTitleQuery { site { siteMetadata { title } } } `}
+            render={template}
+        />
+        )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
