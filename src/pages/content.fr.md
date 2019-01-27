@@ -1,5 +1,5 @@
 ---
-title: "Easy basic recipe"
+title: "La recette facile de base"
 date: "2019-01-27"
 ---
 
