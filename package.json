@@ -9,6 +9,7 @@
     "@material-ui/icons": "^3.0.2",
     "gatsby": "^2.0.98",
     "gatsby-image": "^2.0.28",
+    "gatsby-plugin-i18n": "^1.0.0",
     "gatsby-plugin-manifest": "^2.0.13",
     "gatsby-plugin-offline": "^2.0.21",
     "gatsby-plugin-react-helmet": "^3.0.2",

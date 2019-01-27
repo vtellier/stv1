@@ -34,6 +34,30 @@ module.exports = {
                 path: `${__dirname}/src/`,
             },
         },
+        {
+            resolve: 'gatsby-plugin-i18n',
+            options: {
+                langKeyDefault: 'en',
+                useLangKeyLayout: false,
+                markdownRemark: {
+                    postPage: 'src/templates/recipe.js',
+                    query: `
+                        {
+                            allMarkdownRemark {
+                                edges {
+                                    node {
+                                        fields {
+                                            slug,
+                                            langKey
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    `
+                }
+            }
+        },
         `gatsby-transformer-remark`
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
