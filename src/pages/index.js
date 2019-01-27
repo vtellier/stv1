@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
             <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
             {data.allMarkdownRemark.edges.map(({ node }) => (
                 <article key={node.id}>
-                    <Link to={node.fields.slug}>
+                    <Link to={node.fields.link}>
                         <h3>
                             {node.frontmatter.title}{" "}
                             <span>
@@ -48,7 +48,7 @@ export const query = graphql`
             title
             date(formatString: "DD MMMM, YYYY")
           }
-          fields { slug }
+          fields { link }
           excerpt
         }
       }

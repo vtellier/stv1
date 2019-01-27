@@ -2,8 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
-export default ({ data }) => {
+export default ({ data, pageContext }) => {
     const recipe = data.markdownRemark;
+    console.log(data.allMarkdownRemark);
     return (
         <Layout>
             <h1>{ recipe.frontmatter.title }</h1>
@@ -13,13 +14,14 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-    query($slug: String!) {
-        markdownRemark(fields: { slug: { eq: $slug } }) {
+    query($link: String!) {
+        markdownRemark(fields: { link: { eq: $link } }) {
             html
             frontmatter {
                 title
             }
-        }
+        },
+        allMarkdownRemark { edges { node { fields { link, slug, locale } }}},
     }
 `
 

@@ -9,12 +9,22 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions
     if (node.internal.type === `MarkdownRemark`) {
-        const slug = createFilePath({ node, getNode, basePath: `pages` })
-        createNodeField({
-            node,
-            name: `slug`,
-            value: slug,
-        })
+        // Multilanguage pages
+        const fileNode = getNode(node.parent);
+        const regex    = /pages\/(.*)(\.(\w+(\-\w+)?))\.md/;
+        const matches  = fileNode.relativePath.match(regex);
+        if(matches != null && matches.length >= 4) {
+            const slug   = matches[1];
+            const locale = matches[3];
+            const link   = `/${locale}/${slug}`;
+            createNodeField({ node, name: `slug`, value: slug, });
+            createNodeField({ node, name: `locale`, value: locale, });
+            createNodeField({ node, name: `link`, value: link, });
+        }
+        else {
+            console.warn('\n', fileNode.relativePath, "doesn't matches the file name format.");
+            console.log(matches);
+        }
     }
 }
 
@@ -26,20 +36,24 @@ exports.createPages = ({ graphql, actions }) => {
         allMarkdownRemark {
             edges {
                 node {
-                    fields { slug }
+                    fields { slug, locale, link }
                 }
             }
         }
     }`).then(result => {
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-            let slug = node.fields.slug;
+            if(node.fields === undefined)
+                console.log("This page is not valid", node);
+            const { slug, locale, link } = node.fields;
             createPage({
-                path: slug,
+                path: link,
                 component: path.resolve(`./src/templates/recipe.js`),
                 context: {
                     // Data pased to context is available
                     // in page queries as GraphQL variables
-                    slug
+                    slug,
+                    locale,
+                    link
                 }
             })
         })
