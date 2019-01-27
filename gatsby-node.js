@@ -35,13 +35,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         addNodeFields({ fileNode:node, createNodeField, node });
     }
     else if(node.internal.type === "Directory") {
-        console.log(node.relativePath);
+//        console.log(node.relativePath);
     }
     else if(node.internal.type === "SitePage") {
-        console.log(node.relativePath);
+//        console.log(node.relativePath);
     }
     else {
-        console.log(node.internal.type);
+//        console.log(node.internal.type);
     }
 }
 
