@@ -6,6 +6,8 @@ import {
     AppBar,
     Toolbar,
     IconButton,
+    Typography,
+    withStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -25,8 +27,20 @@ const GenerateTranslations = (context, nodes) => {
     return ( <TranslationsMenu translations={ filtered } />);
 }
 
-const Header = (...args) => {
-    const { siteTitle, context } = args[0];
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
+
+const Header = ({ context, siteTitle, classes }) => {
 
     const render = data => {
         const { allSitePage } = data;
@@ -39,17 +53,17 @@ const Header = (...args) => {
                         <IconButton color="inherit" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
-                        <h1 style={{ margin: 0 }}>
-                        <Link
-                            to="/"
-                            style={{
-                                color: `white`,
-                                textDecoration: `none`,
-                            }}
-                        >
-                            {siteTitle}
-                        </Link>
-                        </h1>
+                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                            <Link
+                                to="/"
+                                style={{
+                                    color: `white`,
+                                    textDecoration: `none`,
+                                }}
+                            >
+                                {siteTitle}
+                            </Link>
+                        </Typography>
                         { translations }
                     </Toolbar>
                 </AppBar>
@@ -81,11 +95,12 @@ const Header = (...args) => {
 }
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+    siteTitle: PropTypes.string,
+    classes: PropTypes.object.isRequired,
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+    siteTitle: ``,
 }
 
-export default Header
+export default withStyles(styles)(Header)
