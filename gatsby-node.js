@@ -15,6 +15,9 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
         let   link   = `/${locale}`;
         if(slug != 'index')
             link += `/${slug}`;
+
+        console.log(fileNode.relativePath, slug, locale, link);
+
         createNodeField({ node, name: `slug`,   value: slug   });
         createNodeField({ node, name: `locale`, value: locale });
         createNodeField({ node, name: `link`,   value: link   });

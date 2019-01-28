@@ -21,6 +21,10 @@ export class TranslationsMenu extends React.PureComponent {
         let { translations } = this.props;
         let { anchorEl } = this.state;
         let opened = Boolean(anchorEl);
+
+        if(!translations || translations.length === 0)
+            return null;
+
         return (
             <>
                 <IconButton

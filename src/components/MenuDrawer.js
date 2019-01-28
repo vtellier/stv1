@@ -12,7 +12,7 @@ class MenuDrawer extends React.PureComponent {
         } = this.props;
 
         allSitePage = allSitePage.reduce((acc,curr) => {
-            if(curr.context.locale === context.locale)
+            if(curr.context && curr.context.locale === context.locale)
                 acc.push(curr);
             return acc;
         },[]);

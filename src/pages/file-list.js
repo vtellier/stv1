@@ -4,8 +4,8 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-const FileList = ({ data }) => (
-<Layout>
+const FileList = ({ data, pageContext }) => (
+<Layout context={ pageContext }>
     <SEO title="FileList" />
     <h1>File list</h1>
     <table>
