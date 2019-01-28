@@ -18,11 +18,11 @@ function Languages(props) {
 
 export default ({ data, pageContext }) => {
     const recipe = data.markdownRemark;
-    const translations = data.allMarkdownRemark.edges.map(obj => obj.node.fields);
+    const translations = data.allMarkdownRemark && data.allMarkdownRemark.edges.map(obj => obj.node.fields);
     //console.log(translations);
 
     return (
-        <Layout>
+        <Layout context={pageContext}>
             <h1>{ recipe.frontmatter.title }</h1>
             <div dangerouslySetInnerHTML={{ __html: recipe.html }}/>
             <Languages translations={translations} />

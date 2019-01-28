@@ -5,13 +5,17 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, pageContext }) => {
+    console.log(data, pageContext);
+    const { allMarkdownRemark, allSitePage } = data;
+    //const pages = allSitePage.edges.map(e => e.node);
+    //console.log(pages);
     return (
-        <Layout>
+        <Layout context={pageContext}>
             <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
             <h1>Hi people</h1>
-            <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
+            <h4>{allMarkdownRemark.totalCount} Posts</h4>
+            {allMarkdownRemark.edges.map(({ node }) => (
                 <article key={node.id}>
                     <Link to={node.fields.link}>
                         <h3>
@@ -38,10 +42,10 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 export const query = graphql`
-  query {
+  query($locale: String!) {
     allMarkdownRemark {
       totalCount
-      edges {
+      edges  {
         node {
           id
           frontmatter {
@@ -52,6 +56,19 @@ export const query = graphql`
           excerpt
         }
       }
+    }
+    allSitePage (
+        filter: { context: { locale: {ne: $locale}}}
+    ) {
+        edges {
+            node {
+                path
+                context {
+                    slug
+                    locale
+                }
+            }
+        }
     }
   }
 `

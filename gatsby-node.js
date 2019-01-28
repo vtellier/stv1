@@ -34,15 +34,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     else if(node.internal.type === "File" && node.absolutePath != null && node.absolutePath !== undefined) {
         addNodeFields({ fileNode:node, createNodeField, node });
     }
-    else if(node.internal.type === "Directory") {
-//        console.log(node.relativePath);
-    }
-    else if(node.internal.type === "SitePage") {
-//        console.log(node.relativePath);
-    }
-    else {
-//        console.log(node.internal.type);
-    }
 }
 
 exports.onCreatePage = ({ page, actions }) => {
@@ -50,13 +41,15 @@ exports.onCreatePage = ({ page, actions }) => {
 
     return new Promise(resolve => {
         const oldPage = Object.assign({}, page)
-        // Remove trailing slash unless page is /
-        const regex   = /(.*\/)*index\.(\w+(\-\w+)?)/;
-        const matches = page.path.match(regex); 
-        if(matches === null)
-            return resolve();
+        const matches = page.path.match(/(.*\/)*index\.(\w+(\-\w+)?)/); 
 
-        page.path = matches[1] + matches[2];
+        if(Array.isArray(matches) && matches.length >= 3) {
+            // index pages
+            page.path = matches[1] + matches[2];
+            page.context.slug = matches[1] + matches[2];
+            page.context.locale = matches[2];
+            page.context.link = page.path;
+        }
 
         if(page.path !== oldPage.path) {
             // Replace new page with old page
