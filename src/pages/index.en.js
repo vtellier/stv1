@@ -7,9 +7,7 @@ import SEO from '../components/seo'
 
 const IndexPage = ({ data, pageContext }) => {
     console.log(data, pageContext);
-    const { allMarkdownRemark, allSitePage } = data;
-    //const pages = allSitePage.edges.map(e => e.node);
-    //console.log(pages);
+    const { allMarkdownRemark } = data;
     return (
         <Layout context={pageContext}>
             <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -42,7 +40,7 @@ const IndexPage = ({ data, pageContext }) => {
 
 export default IndexPage
 export const query = graphql`
-  query($locale: String!) {
+  query {
     allMarkdownRemark {
       totalCount
       edges  {
@@ -56,19 +54,6 @@ export const query = graphql`
           excerpt
         }
       }
-    }
-    allSitePage (
-        filter: { context: { locale: {ne: $locale}}}
-    ) {
-        edges {
-            node {
-                path
-                context {
-                    slug
-                    locale
-                }
-            }
-        }
     }
   }
 `

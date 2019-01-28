@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
 import {
     IconButton,
@@ -11,7 +12,6 @@ export class TranslationsMenu extends React.PureComponent {
         anchorEl: null,
     };
     handleClick = event => {
-        console.log(event);
         this.setState({ anchorEl: event.currentTarget });
     };
     handleClose = () => {
@@ -25,6 +25,8 @@ export class TranslationsMenu extends React.PureComponent {
             <div>
                 <IconButton
                     aria-label="Translations"
+                    aria-owns={opened ? 'long-menu' : undefined}
+                    aria-haspopup="true"
                     onClick={ this.handleClick }
                 >
                     <TranslateIcon />
@@ -35,7 +37,11 @@ export class TranslationsMenu extends React.PureComponent {
                     anchorEl={ anchorEl }
                 >
                     { translations.map(tr => (
-                        <MenuItem key={'tr-'+tr.id} to={tr.path}>{ tr.context.locale }</MenuItem>
+                        <MenuItem key={'tr-'+tr.id}>
+                            <Link to={tr.path}>
+                                { tr.context.locale }
+                            </Link>
+                        </MenuItem>
                     )) }
                 </Menu>
             </div>

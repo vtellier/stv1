@@ -13,12 +13,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 const GenerateTranslations = (context, nodes) => {
     const filtered = nodes.reduce((acc,curr) => {
         if(!curr.context) {
-            console.log("SHitty paage: ", curr);
+            console.warn("Invalid page: ", curr);
             return acc;
         }
-        console.log(curr);
         if(curr.context.slug === context.slug
-        && curr.context.locale != context.locale)
+        && curr.context.locale !== context.locale)
             acc.push(curr);
         return acc;
     }, []);
@@ -27,7 +26,6 @@ const GenerateTranslations = (context, nodes) => {
 }
 
 const Header = (...args) => {
-    console.log('header', args);
     const { siteTitle, context } = args[0];
 
     const render = data => {
@@ -35,7 +33,6 @@ const Header = (...args) => {
 
         const translations = GenerateTranslations(context, allSitePage.edges.map(n => n.node));
 
-        console.log(data);
         return (
                 <AppBar position="static">
                     <Toolbar>
