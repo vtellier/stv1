@@ -22,19 +22,29 @@ export class TranslationsMenu extends React.PureComponent {
         let { anchorEl } = this.state;
         let opened = Boolean(anchorEl);
         return (
-            <div>
+            <>
                 <IconButton
                     aria-label="Translations"
-                    aria-owns={opened ? 'long-menu' : undefined}
+                    aria-owns={opened ? 'menu-translations-appbar' : undefined}
                     aria-haspopup="true"
                     onClick={ this.handleClick }
+                    color="inherit"
                 >
                     <TranslateIcon />
                 </IconButton>
                 <Menu
+                    id="menu-translations-appbar"
                     open={ opened }
                     onClose={ this.handleClose }
                     anchorEl={ anchorEl }
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
                 >
                     { translations.map(tr => (
                         <MenuItem key={'tr-'+tr.id}>
@@ -44,7 +54,7 @@ export class TranslationsMenu extends React.PureComponent {
                         </MenuItem>
                     )) }
                 </Menu>
-            </div>
+            </>
         );
     }
 }

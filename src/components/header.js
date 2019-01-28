@@ -1,4 +1,4 @@
-import { Link, StaticQuery, graphql } from 'gatsby'
+import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TranslationsMenu } from '../components/TranslationsMenu';
@@ -40,17 +40,27 @@ const styles = {
   },
 };
 
-const Header = ({ context, siteTitle, classes }) => {
-
-    const render = data => {
-        const { allSitePage } = data;
+class Header extends React.PureComponent {
+    state = {
+    };
+    render = () => {
+        let {
+            context,
+            siteTitle,
+            classes,
+            onMenuOpen,
+            allSitePage
+        } = this.props;
 
         const translations = GenerateTranslations(context, allSitePage.edges.map(n => n.node));
 
         return (
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton color="inherit" aria-label="Menu">
+                        <IconButton
+                            color="inherit"
+                            aria-label="Menu"
+                            onClick={ onMenuOpen }>
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
@@ -68,30 +78,8 @@ const Header = ({ context, siteTitle, classes }) => {
                     </Toolbar>
                 </AppBar>
             );
-    }
 
-    return (
-        <StaticQuery
-            query={
-                graphql` query {
-                    allSitePage {
-                            edges {
-                                node {
-                                    id
-                                    path
-                                    context {
-                                        slug
-                                        locale
-                                        link
-                                    } 
-                                }
-                            }
-                        }
-                    }
-                ` }
-            render={ render }
-        />
-    );
+    };
 }
 
 Header.propTypes = {
