@@ -14,6 +14,7 @@ class Layout extends React.Component {
         let { children, context } = this.props;
         let { menuOpen } = this.state;
         let template = ({ site, allSitePage }) => {
+            allSitePage = allSitePage.edges.map(n => n.node);
             console.log(context);
             return (
                 <>
@@ -23,7 +24,11 @@ class Layout extends React.Component {
                         allSitePage={ allSitePage }
                         onMenuOpen={ () => this.setState({ menuOpen: true }) }
                     />
-                    <MenuDrawer open={ menuOpen } />
+                    <MenuDrawer
+                        open={ menuOpen }
+                        onClose={ () => { this.setState({ menuOpen:false }) } }
+                        allSitePage={ allSitePage }
+                        context={context} />
                     <div
                         style={{
                             margin: `0 auto`,

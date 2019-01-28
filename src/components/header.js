@@ -41,8 +41,6 @@ const styles = {
 };
 
 class Header extends React.PureComponent {
-    state = {
-    };
     render = () => {
         let {
             context,
@@ -52,7 +50,7 @@ class Header extends React.PureComponent {
             allSitePage
         } = this.props;
 
-        const translations = GenerateTranslations(context, allSitePage.edges.map(n => n.node));
+        const translations = GenerateTranslations(context, allSitePage);
 
         return (
                 <AppBar position="static">
