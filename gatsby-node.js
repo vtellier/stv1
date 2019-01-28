@@ -46,7 +46,7 @@ exports.onCreatePage = ({ page, actions }) => {
         if(Array.isArray(matches) && matches.length >= 3) {
             // index pages
             page.path = matches[1] + matches[2];
-            page.context.slug = matches[1] + matches[2];
+            page.context.slug = matches[1];
             page.context.locale = matches[2];
             page.context.link = page.path;
         }

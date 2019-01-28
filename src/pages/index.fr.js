@@ -5,9 +5,9 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, pageContext }) => {
     return (
-        <Layout>
+        <Layout context={pageContext}>
             <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
             <h1>Salut les gens</h1>
             <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
