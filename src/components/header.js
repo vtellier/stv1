@@ -1,13 +1,14 @@
 import { Link, StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-
+import { TranslationsMenu } from '../components/TranslationsMenu';
 import {
     AppBar,
     Toolbar,
-    IconButton
+    IconButton,
 } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+import MenuIcon from '@material-ui/icons/Menu';
+
 
 const GenerateTranslations = (context, nodes) => {
     const filtered = nodes.reduce((acc,curr) => {
@@ -22,11 +23,7 @@ const GenerateTranslations = (context, nodes) => {
         return acc;
     }, []);
 
-    return (
-        <div>
-            { filtered.map(tr => ( <Link key={'tr-'+tr.id} to={tr.path}>{ tr.context.locale }</Link>)) }
-        </div>
-    );
+    return ( <TranslationsMenu translations={ filtered } />);
 }
 
 const Header = (...args) => {
@@ -43,7 +40,7 @@ const Header = (...args) => {
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton color="inherit" aria-label="Menu">
-                            <Menu />
+                            <MenuIcon />
                         </IconButton>
                         <h1 style={{ margin: 0 }}>
                         <Link
