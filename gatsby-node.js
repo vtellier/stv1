@@ -24,8 +24,8 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
         createNodeField({ node, name: `link`,   value: link   });
     }
     else {
-        console.warn('\n', fileNode.relativePath, "doesn't matches the file name format.");
-        console.log(matches);
+        //console.warn('\n', fileNode.relativePath, "doesn't matches the file name format.");
+        //console.log(matches);
     }
 };
 
@@ -60,7 +60,7 @@ exports.onCreatePage = ({ page, actions }) => {
                 defaultIndex.context.canonical = page.path;
                 defaultIndex.path = matches[1];
                 createPage(defaultIndex);
-                console.log(`created`, defaultIndex);
+                //console.log(`created`, defaultIndex);
             }
         }
 
@@ -68,7 +68,7 @@ exports.onCreatePage = ({ page, actions }) => {
             // Replace new page with old page
             deletePage(oldPage)
             createPage(page)
-            console.log(`created page`, page);
+            //console.log(`created page`, page);
         }
         resolve()
     })
@@ -82,18 +82,27 @@ exports.createPages = ({ graphql, actions }) => {
         allMarkdownRemark {
             edges {
                 node {
+                    fileAbsolutePath
                     fields { slug, locale, link }
+                    frontmatter { template }
                 }
             }
         }
     }`).then(result => {
+        if(!result.data)
+            throw new Error(`No markdown page has been returned, please ensure they
+                            fullfill the following frontmatter fields:
+                                - template`);
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
             if(node.fields === undefined)
                 console.log("This page is not valid", node);
             const { slug, locale, link } = node.fields;
+            const { template } = node.frontmatter;
+            if(!template) throw new Error(`No template has been specified in the
+                                          frontmatter of ${node.fileAbsolutePath}`);
             createPage({
                 path: link,
-                component: path.resolve(`./src/templates/recipe.js`),
+                component: path.resolve(`./src/templates/${template}`),
                 context: {
                     // Data pased to context is available
                     // in page queries as GraphQL variables
