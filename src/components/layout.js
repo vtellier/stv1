@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 
-
 import Header from './header'
 import MenuDrawer from './MenuDrawer'
 import './layout.css'
@@ -13,6 +12,7 @@ class Layout extends React.Component {
     render = () => {
         let { children, context } = this.props;
         let { menuOpen } = this.state;
+        console.log(`I am ${!context.canonical ? ' ': 'not '}the canonical url`);
         let template = ({ site, allSitePage }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
             console.log(context);

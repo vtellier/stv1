@@ -5,6 +5,7 @@
  */
 const path = require('path')
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const config = require('./gatsby-config');
 
 const addNodeFields = ({ fileNode, createNodeField, node }) => {
     const regex    = /pages\/(.*)(\.(\w+(\-\w+)?))\.(md|js)/;
@@ -52,12 +53,22 @@ exports.onCreatePage = ({ page, actions }) => {
             page.context.slug = matches[1];
             page.context.locale = matches[2];
             page.context.link = page.path;
+
+            if(config.siteMetadata.defaultLanguage === page.context.locale) {
+                let defaultIndex = Object.assign({}, page)
+                defaultIndex.context = Object.assign({}, page.context);
+                defaultIndex.context.canonical = page.path;
+                defaultIndex.path = matches[1];
+                createPage(defaultIndex);
+                console.log(`created`, defaultIndex);
+            }
         }
 
         if(page.path !== oldPage.path) {
             // Replace new page with old page
             deletePage(oldPage)
             createPage(page)
+            console.log(`created page`, page);
         }
         resolve()
     })
