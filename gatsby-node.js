@@ -11,13 +11,13 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
     const regex    = /pages\/(.*)(\.(\w+(\-\w+)?))\.(md|js)/;
     const matches  = fileNode.relativePath.match(regex);
     if(matches != null && matches.length >= 4) {
-        const slug   = matches[1];
+        let slug   = matches[1];
         const locale = matches[3];
         let   link   = `/${locale}`;
-        if(slug != 'index')
+        if(slug.substring(slug.length-5) !== 'index')
             link += `/${slug}`;
 
-        console.log(fileNode.relativePath, slug, locale, link);
+        //console.log(fileNode.relativePath, slug, locale, link);
 
         createNodeField({ node, name: `slug`,   value: slug   });
         createNodeField({ node, name: `locale`, value: locale });
@@ -60,7 +60,6 @@ exports.onCreatePage = ({ page, actions }) => {
                 defaultIndex.context.canonical = page.path;
                 defaultIndex.path = matches[1];
                 createPage(defaultIndex);
-                //console.log(`created`, defaultIndex);
             }
         }
 
@@ -94,12 +93,11 @@ exports.createPages = ({ graphql, actions }) => {
                             fullfill the following frontmatter fields:
                                 - template`);
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-            if(node.fields === undefined)
-                console.log("This page is not valid", node);
             const { slug, locale, link } = node.fields;
             const { template } = node.frontmatter;
             if(!template) throw new Error(`No template has been specified in the
                                           frontmatter of ${node.fileAbsolutePath}`);
+
             createPage({
                 path: link,
                 component: path.resolve(`./src/templates/${template}`),
@@ -111,6 +109,23 @@ exports.createPages = ({ graphql, actions }) => {
                     link
                 }
             })
+
+            if(locale === config.siteMetadata.defaultLanguage
+            && slug.substring(slug.length-5) === 'index') {
+                let notCanonicalLink = '/'+link.substring(locale.length+1);
+                createPage({
+                    path: notCanonicalLink,
+                    component: path.resolve(`./src/templates/${template}`),
+                    context: {
+                        // Data pased to context is available
+                        // in page queries as GraphQL variables
+                        slug,
+                        locale,
+                        link: notCanonicalLink,
+                        canonical: link
+                    }
+                })
+            }
         })
     })
 }
