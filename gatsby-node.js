@@ -47,6 +47,7 @@ exports.onCreatePage = ({ page, actions }) => {
         const oldPage = Object.assign({}, page)
         const matches = page.path.match(/(.*\/)*index\.(\w+(\-\w+)?)/); 
 
+        // Translated pages
         if(Array.isArray(matches) && matches.length >= 3) {
             // index pages
             page.path = matches[1] + matches[2];
