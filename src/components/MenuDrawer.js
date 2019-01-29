@@ -12,7 +12,8 @@ class MenuDrawer extends React.PureComponent {
         } = this.props;
 
         allSitePage = allSitePage.reduce((acc,curr) => {
-            if(curr.context && curr.context.locale === context.locale)
+            if(curr.context
+            && curr.context.locale === context.locale)
                 acc.push(curr);
             return acc;
         },[]);
@@ -24,7 +25,7 @@ class MenuDrawer extends React.PureComponent {
             >
                 { Array.isArray(allSitePage) &&
                     allSitePage.map(p => (
-                        <Link key={'menu-link-'+p.slug} to={ p.path }>{ p.context.slug }</Link>
+                        <Link key={'menu-link-'+p.context.slug} to={ p.path }>{ p.context.slug }</Link>
                     ))
                 }
             </Drawer>
