@@ -50,7 +50,13 @@ class Layout extends React.Component {
                         site {
                             siteMetadata { title }
                         }
-                        allSitePage {
+                        allSitePage (
+                            filter: {
+                                context: {
+                                    canonical: { in: [ null, true ] }
+                                }
+                            }
+                        ) {
                             edges {
                                 node {
                                     id

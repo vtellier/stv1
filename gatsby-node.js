@@ -53,11 +53,12 @@ exports.onCreatePage = ({ page, actions }) => {
             page.context.slug = matches[1];
             page.context.locale = matches[2];
             page.context.link = page.path;
+            page.context.canonical = true;
 
             if(config.siteMetadata.defaultLanguage === page.context.locale) {
                 let defaultIndex = Object.assign({}, page)
                 defaultIndex.context = Object.assign({}, page.context);
-                defaultIndex.context.canonical = page.path;
+                defaultIndex.context.canonical = false;
                 defaultIndex.path = matches[1];
                 createPage(defaultIndex);
             }
@@ -106,7 +107,8 @@ exports.createPages = ({ graphql, actions }) => {
                     // in page queries as GraphQL variables
                     slug,
                     locale,
-                    link
+                    link,
+                    canonical:true
                 }
             })
 
@@ -121,8 +123,8 @@ exports.createPages = ({ graphql, actions }) => {
                         // in page queries as GraphQL variables
                         slug,
                         locale,
-                        link: notCanonicalLink,
-                        canonical: link
+                        link: link,
+                        canonical: false
                     }
                 })
             }
