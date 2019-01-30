@@ -2,20 +2,81 @@ const path = require('path');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const languageTagRegex = require('ietf-language-tag-regex');
 
-// Work around https://github.com/sebinsua/ietf-language-tag-regex/issues/1
-const isBcp47 = (tag) => tag !== 'html' && languageTagRegex().test(tag);
+
+class PathFinder {
+    constructor(page, defaultLanguage) {
+        this.page = page;
+        this.defaultLanguage = defaultLanguage || 'en';
+    }
+
+    // Work around https://github.com/sebinsua/ietf-language-tag-regex/issues/1
+    isBcp47(tag) {
+        return tag !== 'html' && languageTagRegex().test(tag);
+    }
+
+    getLocaleFromPath() {
+        const localeMatches = this.page.path.match(/(.*)(\.(\w+(\-\w+)?))/);
+
+        if(localeMatches && localeMatches.length >= 4) {
+            const locale = localeMatches[3];
+            if(this.isBcp47(locale)) {
+                return locale;
+            }
+        }
+
+        return null;
+    }
+
+    getSlug() {
+        const pathItems = this.page.path.split('/');
+        if(pathItems.length == 1)
+            return "/";
+
+        const purified = pathItems.reduce((acc,curr) => {
+            if(curr != '')
+                acc.push(curr);
+            return acc;
+        }, []);
+
+        const joined = '/' + purified.join('/');
+
+        const pathLocale = this.getLocaleFromPath();
+        if(pathLocale === null)
+            return joined;
+        else
+            return joined.substring(0,joined.length - pathLocale.length-1);
+    }
+
+    getAll() {
+        return {
+            locale: this.getLocaleFromPath() || this.defaultLanguage,
+            slug: this.getSlug()
+        };
+    }
+}
+
+const isBcp47 = (tag) => {
+    return tag !== 'html' && languageTagRegex().test(tag);
+}
 
 // By surveying the pages' creation, we'll intercept the indexes so that we
 // can redirect them to their internationalized path
 module.exports = ({ page, actions }, pluginOptions) => {
     const { createPage, deletePage } = actions
 
+
     return new Promise(resolve => {
         const oldPage = Object.assign({}, page)
 
-        let locale  = pluginOptions.defaultLanguage;
+        let pf = new PathFinder(page, pluginOptions.defaultLanguage);
+        console.log('PathFinder:', pf.getAll());
+
+        let {
+            locale,
+            slug
+        } = pf.getAll();
+
         let newPath = page.path;
-        let slug = "";
         const localeMatches = page.path.match(/(.*)(\.(\w+(\-\w+)?))/);
 
         if(localeMatches && localeMatches.length >= 4) {

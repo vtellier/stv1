@@ -5,4 +5,6 @@
  */
 
 exports.onCreatePage = require('./on-create-page.js');
+exports.onCreateNode = ({ node, actions }) => {
+};
 
