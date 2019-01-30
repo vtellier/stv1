@@ -50,13 +50,7 @@ class Layout extends React.Component {
                         site {
                             siteMetadata { title }
                         }
-                        allSitePage (
-                            filter: {
-                                context: {
-                                    canonical: { in: [ null, true ] }
-                                }
-                            }
-                        ) {
+                        allSitePage {
                             edges {
                                 node {
                                     id
@@ -64,7 +58,7 @@ class Layout extends React.Component {
                                     context {
                                         slug
                                         locale
-                                        link
+                                        canonical
                                     } 
                                 }
                             }

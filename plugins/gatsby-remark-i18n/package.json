@@ -13,5 +13,8 @@
         "translation"
     ],
     "author": "@vtellier",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "ietf-language-tag-regex": "0.0.5"
+    }
 }

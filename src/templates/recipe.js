@@ -33,7 +33,7 @@ export default ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-    query($link: String!, $filesRegex: String!) {
+    query($slug: String!, $filesRegex: String!) {
         allFile (
             filter: {
                 relativePath: { regex: $filesRegex }
@@ -52,7 +52,7 @@ export const query = graphql`
                 }
             }
         }
-        markdownRemark(fields: { link: { eq: $link } }) {
+        markdownRemark(fields: { slug: { eq: $slug } }) {
             html
             frontmatter {
                 title

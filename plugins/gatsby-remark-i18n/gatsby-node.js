@@ -3,136 +3,64 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require('path')
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require('path');
+const { createFilePath } = require(`gatsby-source-filesystem`);
+const languageTagRegex = require('ietf-language-tag-regex');
 
 
-const addNodeFields = ({ fileNode, createNodeField, node }) => {
-    const regex    = /pages\/(.*)(\.(\w+(\-\w+)?))\.(md|js)/;
-    const matches  = fileNode.relativePath.match(regex);
-    if(matches != null && matches.length >= 4) {
-        let slug   = matches[1];
-        const locale = matches[3];
-        let   link   = `/${locale}`;
-        if(slug.substring(slug.length-5) !== 'index')
-            link += `/${slug}`;
-
-        //console.log(fileNode.relativePath, slug, locale, link);
-
-        createNodeField({ node, name: `slug`,      value: slug   });
-        createNodeField({ node, name: `locale`,    value: locale });
-        createNodeField({ node, name: `link`,      value: link   });
-    }
-};
-
-exports.onCreateNode = ({ node, getNode, actions, }, configOptions ) => {
-    const { createNodeField } = actions;
-
-    if (node.internal.type === `MarkdownRemark`) {
-        const fileNode = getNode(node.parent);
-        addNodeFields({ fileNode, createNodeField, node });
-    }
-    else if(node.internal.type === "File") {
-        if(node.absolutePath != null && node.absolutePath !== undefined) {
-            addNodeFields({ fileNode:node, createNodeField, node });
-        }
-        else {
-            console.log(node.internal.type);
-        }
-    }
-}
-
+// By surveying the pages' creation, we'll intercept the indexes so that we
+// can redirect them to their internationalized path
 exports.onCreatePage = ({ page, actions }, pluginOptions) => {
     const { createPage, deletePage } = actions
 
+    console.log('plugin onCreatePage', page.path);
+
     return new Promise(resolve => {
         const oldPage = Object.assign({}, page)
-        const matches = page.path.match(/(.*\/)*index\.(\w+(\-\w+)?)/); 
 
-        // Translated pages
-        if(Array.isArray(matches) && matches.length >= 3) {
-            // index pages
-            page.path = matches[1] + matches[2];
-            page.context.slug = matches[1];
-            page.context.locale = matches[2];
-            page.context.link = page.path;
-            page.context.canonical = true;
+        let locale  = pluginOptions.defaultLanguage;
+        let newPath = page.path;
+        const localeMatches = page.path.match(/(.*)(\.(\w+(\-\w+)?))/);
 
-            if(pluginOptions.defaultLanguage === page.context.locale) {
+        if(localeMatches && localeMatches.length >= 4) {
+            const explicitLocale = localeMatches[3];
+            if(languageTagRegex().test(explicitLocale)) {
+                locale = explicitLocale;
+                newPath = localeMatches[1];
+            }
+        }
+        else {
+            console.log('does not matches: ', localeMatches);
+        }
+
+        newPath = '/' + locale + newPath;
+        let canonical = newPath;
+
+        // Handling the index pages
+        const matches = page.path.match(/(.*\/)*index(\.[^\/]+)?/); 
+        if(matches && matches.length >= 2) {
+            canonical = locale + matches[1];
+            newPath = canonical;
+
+            // Creates the non canonical page
+            if(pluginOptions.defaultLanguage === locale) {
                 let defaultIndex = Object.assign({}, page)
-                defaultIndex.context = Object.assign({}, page.context);
-                defaultIndex.context.canonical = false;
                 defaultIndex.path = matches[1];
+                defaultIndex.context = Object.assign({}, page.context);
+                defaultIndex.context.canonical = canonical;
+                console.log('Creating non canonical page', defaultIndex.path);
                 createPage(defaultIndex);
             }
         }
 
-        if(page.path !== oldPage.path) {
-            // Replace new page with old page
-            deletePage(oldPage)
-            createPage(page)
-            //console.log(`created page`, page);
-        }
-        resolve()
-    })
-}
+        page.path = newPath;
+        page.context.locale = locale;
+        page.context.canonical = canonical;
 
-exports.createPages = ({ graphql, actions }, pluginOptions) => {
-    // **Note:** The graphql function call returns a Promise
-    // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
-    const { createPage } = actions
-    return graphql(`{
-        allMarkdownRemark {
-            edges {
-                node {
-                    fileAbsolutePath
-                    fields { slug, locale, link }
-                    frontmatter { template }
-                }
-            }
-        }
-    }`).then(result => {
-        if(!result.data)
-            throw new Error(`No markdown page has been returned, please ensure they
-                            fullfill the following frontmatter fields:
-                                - template`);
-        result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-            const { slug, locale, link } = node.fields;
-            const { template } = node.frontmatter;
-            if(!template) throw new Error(`No template has been specified in the
-                                          frontmatter of ${node.fileAbsolutePath}`);
+        deletePage(oldPage);
+        createPage(page);
 
-            createPage({
-                path: link,
-                component: path.resolve(`./src/templates/${template}`),
-                context: {
-                    // Data pased to context is available
-                    // in page queries as GraphQL variables
-                    slug,
-                    locale,
-                    link,
-                    canonical:true,
-                    filesRegex: `/${slug.replace('/','\/')}/`
-                }
-            })
-
-            if(locale === pluginOptions.defaultLanguage
-            && slug.substring(slug.length-5) === 'index') {
-                let notCanonicalLink = '/'+link.substring(locale.length+1);
-                createPage({
-                    path: notCanonicalLink,
-                    component: path.resolve(`./src/templates/${template}`),
-                    context: {
-                        // Data pased to context is available
-                        // in page queries as GraphQL variables
-                        slug,
-                        locale,
-                        link: link,
-                        canonical: false
-                    }
-                })
-            }
-        })
+        resolve();
     })
 }
 
