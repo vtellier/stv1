@@ -3,7 +3,6 @@ module.exports = {
         title: `Steak-Tartare`,
         description: `Exclusively steak-tartare recipes, designed and approved for you`,
         author: `@vtellier`,
-        defaultLanguage: 'fr',
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
@@ -35,7 +34,13 @@ module.exports = {
                 path: `${__dirname}/src/`,
             },
         },
-        `gatsby-transformer-remark`
+        `gatsby-transformer-remark`,
+        {
+            resolve: `gatsby-remark-i18n`,
+            options: {
+                defaultLanguage: 'fr'
+            }
+        }
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',

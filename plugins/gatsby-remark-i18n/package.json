@@ -1,0 +1,17 @@
+{
+    "name": "gatsby-remark-i18n",
+    "description": "Internationalization of gatbsy projects using gatsby-tranfomer-remark. It will put your all your pages (md or js) under the locale sub tree (ex.: www.example.com/fr/hello ; www.example.com/en/hello)",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "gatbsy",
+        "gatsby-plugin",
+        "gatsby-transform-remark",
+        "i18n",
+        "react",
+        "translation"
+    ],
+    "author": "@vtellier",
+    "license": "ISC"
+}
