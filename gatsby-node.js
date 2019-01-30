@@ -19,9 +19,10 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
 
         //console.log(fileNode.relativePath, slug, locale, link);
 
-        createNodeField({ node, name: `slug`,   value: slug   });
-        createNodeField({ node, name: `locale`, value: locale });
-        createNodeField({ node, name: `link`,   value: link   });
+        createNodeField({ node, name: `slug`,      value: slug   });
+        createNodeField({ node, name: `locale`,    value: locale });
+        createNodeField({ node, name: `link`,      value: link   });
+        createNodeField({ node, name: `canonical`, value: true   });
     }
     else {
         //console.warn('\n', fileNode.relativePath, "doesn't matches the file name format.");
@@ -30,13 +31,18 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
-    const { createNodeField } = actions
+    const { createNodeField } = actions;
     if (node.internal.type === `MarkdownRemark`) {
         const fileNode = getNode(node.parent);
         addNodeFields({ fileNode, createNodeField, node });
     }
-    else if(node.internal.type === "File" && node.absolutePath != null && node.absolutePath !== undefined) {
-        addNodeFields({ fileNode:node, createNodeField, node });
+    else if(node.internal.type === "File") {
+        if(node.absolutePath != null && node.absolutePath !== undefined) {
+            addNodeFields({ fileNode:node, createNodeField, node });
+        }
+        else {
+            console.log(node.internal.type);
+        }
     }
 }
 
