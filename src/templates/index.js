@@ -15,8 +15,8 @@ export default ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-    query($slug: String!) {
-        markdownRemark(fields: { slug: { eq: $slug } }) {
+    query($link: String!) {
+        markdownRemark(fields: { link: { eq: $link } }) {
             html
             frontmatter {
                 title
