@@ -12,7 +12,7 @@ export default ({ data, pageContext }) => {
     console.log(data.allFile);
     const images = data.allFile.edges.reduce((acc,curr) => {
         const { ext, relativePath } = curr.node;
-        const id = relativePath.substring( slug.length+1, relativePath.length-ext.length );
+        const id = relativePath.substring( slug.length, relativePath.length-ext.length );
         acc[id] = curr.node;
         return acc;
     }, {});
@@ -33,10 +33,10 @@ export default ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-    query($slug: String!, $filesRegex: String!) {
+    query($pathDotLanguage: String!, $pathRegex: String!) {
         allFile (
             filter: {
-                relativePath: { regex: $filesRegex }
+                relativePath: { regex: $pathRegex }
                 absolutePath: { regex: "/images/" }
             }
         ) {
@@ -52,7 +52,7 @@ export const query = graphql`
                 }
             }
         }
-        markdownRemark(fields: { slug: { eq: $slug } }) {
+        markdownRemark(fields: { pathDotLanguage: { eq: $pathDotLanguage } }) {
             html
             frontmatter {
                 title
