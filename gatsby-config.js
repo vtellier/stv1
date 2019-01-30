@@ -3,7 +3,7 @@ module.exports = {
         title: `Steak-Tartare`,
         description: `Exclusively steak-tartare recipes, designed and approved for you`,
         author: `@vtellier`,
-        defaultLanguage: 'en',
+        defaultLanguage: 'fr',
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
