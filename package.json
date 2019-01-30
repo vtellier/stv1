@@ -34,7 +34,7 @@
     "deploy": "./deploy.sh"
   },
   "devDependencies": {
-    "prettier": "^1.16.1"
+    "prettier": "^1.16.2"
   },
   "repository": {
     "type": "git",
