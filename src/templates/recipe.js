@@ -60,11 +60,4 @@ export const query = graphql`
         }
     }
 `
-        //file(relativePath: {regex: $filesRegex}) {
-        //    childImageSharp {
-        //        fixed(width: 380, height: 285) {
-        //            ...GatsbyImageSharpFixed
-        //        }
-        //    }
-        //}
 
