@@ -4,7 +4,6 @@ import Layout from "../components/layout"
 
 export default ({ data, pageContext }) => {
     const page = data.markdownRemark;
-    console.log(page);
 
     return (
         <Layout context={pageContext}>

@@ -58,6 +58,12 @@ class PathFinder {
         return '/' + slugCopy.join('/');
     }
 
+    getPathRegex() {
+        let regex = this.explosedSlug.join('/');
+        regex = regex.replace('/','\/');
+        return '/' + regex + '/';
+    }
+
     getPaths() {
         let paths = [];
         paths.push(this.getCanonical());
@@ -66,6 +72,18 @@ class PathFinder {
                 paths.push(this.getSlug());
         }
         return paths;
+    }
+    
+    getPages() {
+        return this.getPaths().map(p => {
+            let newPage = Object.assign({},this.page);
+            newPage.path              = p;
+            newPage.context.locale    = this.getLocale();
+            newPage.context.canonical = this.getCanonical();
+            newPage.context.slug      = this.getSlug();
+            newPage.context.pathRegex = this.getPathRegex();
+            return newPage;
+        });
     }
 
     getAll() {
@@ -87,49 +105,13 @@ const isBcp47 = (tag) => {
 module.exports = ({ page, actions }, pluginOptions) => {
     const { createPage, deletePage } = actions
 
-
     return new Promise(resolve => {
         const oldPage = Object.assign({}, page)
 
         let pf = new PathFinder(page, pluginOptions.defaultLanguage);
-        console.log(page.path, 'PathFinder:', pf.getAll());
-
-        let {
-            locale,
-            slug
-        } = pf.getAll();
-
-        let newPath = '/' + locale + slug;
-        let canonical = newPath;
-
-        // Handling the index pages
-        const matches = page.path.match(/(.*\/)*index(\.[^\/]+)?/); 
-        if(matches && matches.length >= 2) {
-            slug = matches[1];
-            canonical = '/' + locale + slug;
-            newPath = canonical;
-
-            // Creates the non canonical page
-            if(pluginOptions.defaultLanguage === locale) {
-                let defaultIndex = Object.assign({}, page)
-                defaultIndex.path = matches[1];
-                defaultIndex.context = Object.assign({}, page.context);
-                defaultIndex.context.locale = locale;
-                defaultIndex.context.canonical = canonical;
-                defaultIndex.context.slug = slug;
-                defaultIndex.context.pathRegex = '/'+slug+'/';
-                createPage(defaultIndex);
-            }
-        }
-
-        page.path = newPath;
-        page.context.locale = locale;
-        page.context.canonical = canonical;
-        page.context.slug = slug;
-        page.context.pathRegex = '/'+slug.substring(1).replace('/','\/')+'/';
 
         deletePage(oldPage);
-        createPage(page);
+        pf.getPages().forEach(p => createPage(p));
 
         resolve();
     })
