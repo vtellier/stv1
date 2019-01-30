@@ -7,6 +7,22 @@ class PathFinder {
     constructor(page, defaultLanguage) {
         this.page = page;
         this.defaultLanguage = defaultLanguage || 'en';
+
+        const pathItems = this.page.path.split('/');
+
+        this.explosedSlug = pathItems.reduce((acc,curr) => {
+            if(curr != '')
+                acc.push(curr);
+            return acc;
+        }, []);
+        this.fileName = this.explosedSlug.pop();
+        
+        const pathLocale = this.getLocaleFromPath();
+        if(pathLocale !== null)
+            this.fileName = this.fileName.substring(0,this.fileName.length - pathLocale.length-1);
+
+        if(this.fileName !== 'index')
+            this.explosedSlug.push(this.fileName);
     }
 
     // Work around https://github.com/sebinsua/ietf-language-tag-regex/issues/1
@@ -27,30 +43,25 @@ class PathFinder {
         return null;
     }
 
+    getLocale() {
+        return this.getLocaleFromPath() || this.defaultLanguage;
+    }
+
     getSlug() {
-        const pathItems = this.page.path.split('/');
-        if(pathItems.length == 1)
-            return "/";
+        return '/' + this.explosedSlug.join('/');
+    }
 
-        const purified = pathItems.reduce((acc,curr) => {
-            if(curr != '')
-                acc.push(curr);
-            return acc;
-        }, []);
-
-        const joined = '/' + purified.join('/');
-
-        const pathLocale = this.getLocaleFromPath();
-        if(pathLocale === null)
-            return joined;
-        else
-            return joined.substring(0,joined.length - pathLocale.length-1);
+    getCanonical() {
+        let slugCopy = this.explosedSlug.slice(0);
+        slugCopy.unshift(this.getLocale());
+        return '/' + slugCopy.join('/');
     }
 
     getAll() {
         return {
-            locale: this.getLocaleFromPath() || this.defaultLanguage,
-            slug: this.getSlug()
+            locale:    this.getLocale(),
+            slug:      this.getSlug(),
+            canonical: this.getCanonical()
         };
     }
 }
@@ -69,31 +80,14 @@ module.exports = ({ page, actions }, pluginOptions) => {
         const oldPage = Object.assign({}, page)
 
         let pf = new PathFinder(page, pluginOptions.defaultLanguage);
-        console.log('PathFinder:', pf.getAll());
+        console.log(page.path, 'PathFinder:', pf.getAll());
 
         let {
             locale,
             slug
         } = pf.getAll();
 
-        let newPath = page.path;
-        const localeMatches = page.path.match(/(.*)(\.(\w+(\-\w+)?))/);
-
-        if(localeMatches && localeMatches.length >= 4) {
-            const explicitLocale = localeMatches[3];
-            if(isBcp47(explicitLocale)) {
-                locale = explicitLocale;
-                slug = localeMatches[1];
-            }
-            else {
-                slug = page.path;
-            }
-        }
-        else {
-            slug = page.path;
-        }
-
-        newPath = '/' + locale + slug;
+        let newPath = '/' + locale + slug;
         let canonical = newPath;
 
         // Handling the index pages
