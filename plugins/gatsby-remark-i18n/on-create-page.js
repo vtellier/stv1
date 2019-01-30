@@ -5,7 +5,7 @@ const languageTagRegex = require('ietf-language-tag-regex');
 
 class PathFinder {
     constructor(page, defaultLanguage) {
-        this.page = page;
+        this.page = Object.assign({},page);
         this.defaultLanguage = defaultLanguage || 'en';
 
         const pathItems = this.page.path.split('/');
@@ -53,15 +53,27 @@ class PathFinder {
 
     getCanonical() {
         let slugCopy = this.explosedSlug.slice(0);
+        //if(this.getLocale() !== this.defaultLanguage)
         slugCopy.unshift(this.getLocale());
         return '/' + slugCopy.join('/');
+    }
+
+    getPaths() {
+        let paths = [];
+        paths.push(this.getCanonical());
+        if(this.getLocale() === this.defaultLanguage) {
+            if(this.fileName === 'index')
+                paths.push(this.getSlug());
+        }
+        return paths;
     }
 
     getAll() {
         return {
             locale:    this.getLocale(),
             slug:      this.getSlug(),
-            canonical: this.getCanonical()
+            canonical: this.getCanonical(),
+            paths:     this.getPaths()
         };
     }
 }
