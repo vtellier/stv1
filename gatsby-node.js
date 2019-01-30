@@ -22,7 +22,6 @@ const addNodeFields = ({ fileNode, createNodeField, node }) => {
         createNodeField({ node, name: `slug`,      value: slug   });
         createNodeField({ node, name: `locale`,    value: locale });
         createNodeField({ node, name: `link`,      value: link   });
-        createNodeField({ node, name: `canonical`, value: true   });
     }
     else {
         //console.warn('\n', fileNode.relativePath, "doesn't matches the file name format.");
@@ -115,7 +114,8 @@ exports.createPages = ({ graphql, actions }) => {
                     slug,
                     locale,
                     link,
-                    canonical:true
+                    canonical:true,
+                    filesRegex: `/${slug.replace('/','\/')}/`
                 }
             })
 
