@@ -7,6 +7,7 @@ menuText: "L'Américain"
 menuTitle: "La recette fast-food à l'américaine"
 ---
 
+# NOT IMPLEMETED
 
 La recette rapide par excellence : cette recette a été simplifiée à l'extrème, pour les repas express !
 
