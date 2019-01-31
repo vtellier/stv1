@@ -23,10 +23,10 @@ class Layout extends React.Component {
 
             allSitePage = allSitePage.reduce((acc,curr) => {
                 curr.menuData = menuData[curr.context.pathDotLanguage];
-
                 acc.push(curr);
                 return acc;
             },[]);
+
 
             return (
                 <>
