@@ -101,8 +101,6 @@ class MenuDrawer extends React.PureComponent {
         let menuTree = new MenuTree();
         allSitePage.forEach(p => menuTree.addPage(p, p.context.slug));
 
-        console.log(menuTree);
-
         return (
             <Drawer
                 open={open}
