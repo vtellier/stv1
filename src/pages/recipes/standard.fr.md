@@ -2,6 +2,7 @@
 title: "La recette facile de base"
 date: "2019-01-27"
 template: "recipe.js"
+menuOrder: 20
 menuText: "La recette standard"
 menuTitle: "Commencez avec la version régulière du steak tartare"
 ---

@@ -18,15 +18,16 @@ class MenuDrawer extends React.PureComponent {
             || curr.menuData === null || curr.menuData === undefined)
                 return acc;
 
-            if(!curr.menuData.menuText || !curr.menuData.menuTitle) {
-                throw new Error(`The page ${curr.path} must provide the following frontmatter properties: menuText, menuTitle and menuOrder`);
+            if(!curr.menuData.menuText || !curr.menuData.menuTitle || !curr.menuData.menuOrder) {
+                throw new Error(`The page ${curr.path} must provide the following ` +
+                                `frontmatter properties: menuText, menuTitle and menuOrder`);
             }
 
             acc.push(curr);
             return acc;
         },[]);
 
-        console.log(allSitePage);
+        allSitePage.sort((e1,e2) => e1.menuData.menuOrder < e2.menuData.menuOrder ? -1 : 0);
 
         return (
             <Drawer

@@ -2,6 +2,7 @@
 title: "La recette du Tartare de boeuf à italienne"
 date: "2019-01-30"
 template: "recipe.js"
+menuOrder: 40
 menuText: "L'italien"
 menuTitle: "Une recette italienne ensolleillée"
 ---

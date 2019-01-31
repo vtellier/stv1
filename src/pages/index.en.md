@@ -2,6 +2,7 @@
 title: "Welcome!"
 date: "2019-01-29"
 template: "index.js"
+menuOrder: 1
 menuText: "Home"
 menuTitle: "Click here to go back to the home page"
 ---

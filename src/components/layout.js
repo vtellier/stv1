@@ -12,19 +12,17 @@ class Layout extends React.Component {
     render = () => {
         let { children, context } = this.props;
         let { menuOpen } = this.state;
-        let template = ({ site, allSitePage, allMarkdownRemark }) => {
+        let template = ({ site, allSitePage, allMarkdownRemark, nonCanonical }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
             let menuData = allMarkdownRemark.edges.map(n => n.node);
 
             menuData = menuData.reduce((acc,curr) => {
-                console.log(curr);
                 acc[curr.fields.pathDotLanguage] = curr.frontmatter;
                 return acc;
             }, {});
 
             allSitePage = allSitePage.reduce((acc,curr) => {
                 curr.menuData = menuData[curr.context.pathDotLanguage];
-                console.log(curr.menuData, curr.context.pathDotLanguage);
 
                 acc.push(curr);
                 return acc;
@@ -95,8 +93,9 @@ class Layout extends React.Component {
                                 node {
                                     fields { pathDotLanguage }
                                     frontmatter {
-                                    menuText
-                                    menuTitle
+                                        menuOrder
+                                        menuText
+                                        menuTitle
                                     }
                                 }
                             }

@@ -51,6 +51,13 @@ class Header extends React.PureComponent {
             allSitePage
         } = this.props;
 
+        const homePage = allSitePage.reduce((acc,curr) => {
+            if(curr.context.slug === '/'
+            && curr.context.locale === context.locale)
+                acc = curr;
+            return acc;
+        }, {});
+
         const translations = GenerateTranslations(context, allSitePage);
 
         return (
@@ -64,7 +71,7 @@ class Header extends React.PureComponent {
                         </IconButton>
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             <Link
-                                to="/"
+                                to={homePage.path}
                                 style={{
                                     color: `white`,
                                     textDecoration: `none`,
