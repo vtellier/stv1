@@ -1,9 +1,9 @@
 ---
-title: "Le tartare vite-fait à l'américaine"
+title: "Le steak tartare du Normand"
 date: "2019-01-30"
 template: "recipe.js"
 menuOrder: 30
-menuText: "L'Américain"
-menuTitle: "La recette fast-food à l'américaine"
+menuText: "Le Normand"
+menuTitle: "Une alternative pour les fans de sucré-salé"
 ---
 # NOT IMPLEMENTED

@@ -1,9 +1,9 @@
 ---
-title: "Le tartare vite-fait à l'américaine"
+title: "Le tartare de boeuf aux poivrons marinés"
 date: "2019-01-30"
 template: "recipe.js"
 menuOrder: 30
-menuText: "L'Américain"
-menuTitle: "La recette fast-food à l'américaine"
+menuText: "Le Catalan"
+menuTitle: "Une recette aux poivrons marinés originale"
 ---
 # NOT IMPLEMENTED
