@@ -29,6 +29,8 @@ Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américai
 - Ajoutez le trait d'**huile d'olive** qui lubrifiera bien la viande, si vous souhaitez mettre de la **moutarde** vous pouvez le faire maintenant.
 - Mélangez à nouveau, et c'est prêt !
 
+<div class="ingredients">
+
 ## Ingrédients
 
 | Ingrédient	    | Quantité    |
@@ -44,4 +46,5 @@ Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américai
 | Sel, poivre       | 1 pincée    |
 | Tabasco           | 1/2 cac max |
 
+</div>
 

@@ -1,7 +1,16 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from 'gatsby-image'
 import Layout from "../components/layout"
+import rehypeReact from "rehype-react"
+
+
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: {
+      a: Link,
+  }
+}).Compiler
 
 export default ({ data, pageContext }) => {
     const recipe   = data.markdownRemark;
@@ -29,6 +38,7 @@ export default ({ data, pageContext }) => {
                     <Img fixed={images['cover'].childImageSharp.fixed} />
                 }
             </header>
+            { renderAst( recipe.htmlAst ) }
             <div dangerouslySetInnerHTML={{ __html: recipe.html }}/>
         </Layout>
     )
@@ -56,7 +66,7 @@ export const query = graphql`
         }
 
         markdownRemark(fields: { pathDotLanguage: { eq: $pathDotLanguage } }) {
-            html
+            htmlAst
             frontmatter {
                 title
             }
