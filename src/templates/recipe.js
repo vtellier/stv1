@@ -8,12 +8,18 @@ export default ({ data, pageContext }) => {
 
     const { pathRegex } = pageContext;
 
-    const images = data.allFile.edges.reduce((acc,curr) => {
-        const { ext, relativePath } = curr.node;
-        const id = relativePath.substring( pathRegex.length-1, relativePath.length-ext.length );
-        acc[id] = curr.node;
-        return acc;
-    }, {});
+    let images = {};
+    if(data.allFile) {
+        images = data.allFile.edges.reduce((acc,curr) => {
+            const { ext, relativePath } = curr.node;
+            const id = relativePath.substring( pathRegex.length-1, relativePath.length-ext.length );
+            acc[id] = curr.node;
+            return acc;
+        }, {});
+    }
+    else {
+        console.warn(`The recipe ${pageContext.pathDotLanguage} has no picture!`);
+    }
 
     return (
         <Layout context={pageContext}>

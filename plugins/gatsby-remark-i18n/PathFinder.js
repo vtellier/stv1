@@ -29,7 +29,6 @@ module.exports = class PathFinder {
 
     translate(translations) {
         const tr = translations.slugs;
-        console.log('hey');
         if(!tr) return;
 
         this.translatedExplosedSlug = this.explosedSlug.map(s => {

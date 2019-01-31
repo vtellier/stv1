@@ -3,20 +3,6 @@ const path = require('path');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const PathFinder = require('./PathFinder');
 
-//const getTranslations = async () => {
-//    return graphql(`
-//        {
-//            file(name: {regex: "/locale/"}, extension: {eq: "json"}) {
-//                relativePath
-//                extension
-//                base
-//                name
-//            }
-//        }
-//    `);
-//}
-
-
 // By surveying the pages' creation, we'll intercept the indexes so that we
 // can redirect them to their internationalized path
 module.exports = ({ page, actions }, pluginOptions) => {
@@ -33,7 +19,6 @@ module.exports = ({ page, actions }, pluginOptions) => {
         if(locale !== pluginOptions.defaultLanguage){
             let translations = require(path.resolve(`src/locale.${locale}.json`));
             pf.translate(translations);
-            console.log(pf.getAll());
         }
 
         deletePage(oldPage);
