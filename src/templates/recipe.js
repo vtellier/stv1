@@ -6,17 +6,14 @@ import Layout from "../components/layout"
 export default ({ data, pageContext }) => {
     const recipe = data.markdownRemark;
 
-    const { slug } = pageContext;
+    const { pathRegex } = pageContext;
 
-    console.log('recipe template:', data, pageContext);
     const images = data.allFile.edges.reduce((acc,curr) => {
         const { ext, relativePath } = curr.node;
-        const id = relativePath.substring( slug.length, relativePath.length-ext.length );
+        const id = relativePath.substring( pathRegex.length-1, relativePath.length-ext.length );
         acc[id] = curr.node;
         return acc;
     }, {});
-
-    console.log(images);
 
     return (
         <Layout context={pageContext}>

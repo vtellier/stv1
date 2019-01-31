@@ -25,8 +25,6 @@ const GenerateTranslations = (context, nodes) => {
         return acc;
     }, []);
 
-    console.log(filtered);
-
     return ( <TranslationsMenu translations={ filtered } />);
 }
 

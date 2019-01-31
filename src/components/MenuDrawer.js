@@ -21,7 +21,7 @@ class MenuDrawer extends React.PureComponent {
             return acc;
         },[]);
 
-        console.log(allSitePage);
+        //console.log(allSitePage);
 
         return (
             <Drawer
