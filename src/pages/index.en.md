@@ -2,6 +2,8 @@
 title: "Welcome!"
 date: "2019-01-29"
 template: "index.js"
+menuText: "Home"
+menuTitle: "Click here to go back to the home page"
 ---
 
 This website is specialised in beaf tartar recipes.

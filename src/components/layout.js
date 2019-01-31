@@ -12,8 +12,24 @@ class Layout extends React.Component {
     render = () => {
         let { children, context } = this.props;
         let { menuOpen } = this.state;
-        let template = ({ site, allSitePage }) => {
+        let template = ({ site, allSitePage, allMarkdownRemark }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
+            let menuData = allMarkdownRemark.edges.map(n => n.node);
+
+            menuData = menuData.reduce((acc,curr) => {
+                console.log(curr);
+                acc[curr.fields.pathDotLanguage] = curr.frontmatter;
+                return acc;
+            }, {});
+
+            allSitePage = allSitePage.reduce((acc,curr) => {
+                curr.menuData = menuData[curr.context.pathDotLanguage];
+                console.log(curr.menuData, curr.context.pathDotLanguage);
+
+                acc.push(curr);
+                return acc;
+            },[]);
+
             return (
                 <>
                     <Header
@@ -26,7 +42,8 @@ class Layout extends React.Component {
                         open={ menuOpen }
                         onClose={ () => { this.setState({ menuOpen:false }) } }
                         allSitePage={ allSitePage }
-                        context={ context } />
+                        context={ context }
+                        menuData={menuData} />
                     <div
                         style={{
                             margin: `20px auto 0 auto`,
@@ -48,6 +65,7 @@ class Layout extends React.Component {
                         site {
                             siteMetadata { title }
                         }
+
                         allSitePage (
                             filter: {
                                 context: {
@@ -66,7 +84,20 @@ class Layout extends React.Component {
                                         locale
                                         canonical
                                         pathRegex
+                                        pathDotLanguage
                                     } 
+                                }
+                            }
+                        }
+
+                        allMarkdownRemark {
+                            edges {
+                                node {
+                                    fields { pathDotLanguage }
+                                    frontmatter {
+                                    menuText
+                                    menuTitle
+                                    }
                                 }
                             }
                         }

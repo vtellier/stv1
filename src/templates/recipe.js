@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 import Layout from "../components/layout"
 
 export default ({ data, pageContext }) => {
-    const recipe = data.markdownRemark;
+    const recipe   = data.markdownRemark;
 
     const { pathRegex } = pageContext;
 
@@ -48,6 +48,7 @@ export const query = graphql`
                 }
             }
         }
+
         markdownRemark(fields: { pathDotLanguage: { eq: $pathDotLanguage } }) {
             html
             frontmatter {

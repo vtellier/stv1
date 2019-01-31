@@ -2,6 +2,8 @@
 title: "Bienvenue!"
 date: "2019-01-29"
 template: "index.js"
+menuText: "Accueil"
+menuTitle: "Cliquez ici pour revenir vers la page d'accueil du site"
 ---
 
 Ce site est spécialisé en recettes de tartare de boeuf.

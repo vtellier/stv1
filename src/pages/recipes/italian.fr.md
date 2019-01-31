@@ -2,6 +2,8 @@
 title: "La recette du Tartare de boeuf à italienne"
 date: "2019-01-30"
 template: "recipe.js"
+menuText: "L'italien"
+menuTitle: "Une recette italienne ensolleillée"
 ---
 
 Cette recette venue tout droit d'Italie saura vous rappeller les saveures de la Méditerrannée. Dans le même style, nous vous recommandons de regarder aussi le steak tartare à l'avocat et à la brousse

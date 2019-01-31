@@ -14,14 +14,19 @@ class MenuDrawer extends React.PureComponent {
         allSitePage = allSitePage.reduce((acc,curr) => {
             if(!curr.context
             || curr.context.locale !== context.locale
-            || curr.translationId === null)
+            || curr.translationId === null
+            || curr.menuData === null || curr.menuData === undefined)
                 return acc;
+
+            if(!curr.menuData.menuText || !curr.menuData.menuTitle) {
+                throw new Error(`The page ${curr.path} must provide the following frontmatter properties: menuText, menuTitle and menuOrder`);
+            }
 
             acc.push(curr);
             return acc;
         },[]);
 
-        //console.log(allSitePage);
+        console.log(allSitePage);
 
         return (
             <Drawer
@@ -30,7 +35,13 @@ class MenuDrawer extends React.PureComponent {
             >
                 { Array.isArray(allSitePage) &&
                     allSitePage.map(p => (
-                        <Link key={'menu-link-'+p.context.slug} to={ p.path }>{ p.context.slug }</Link>
+                        <Link
+                            key={'menu-link-'+p.context.slug}
+                            to={ p.path }
+                            title={p.menuData.menuTitle}
+                        >
+                            { p.menuData.menuText }
+                        </Link>
                     ))
                 }
             </Drawer>
