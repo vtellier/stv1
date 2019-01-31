@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Flag from 'react-country-flag'
+
 
 import {
     IconButton,
@@ -11,12 +13,6 @@ export class TranslationsMenu extends React.PureComponent {
     state = {
         anchorEl: null,
     };
-    handleClick = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
     render() {
         let { translations } = this.props;
         let { anchorEl } = this.state;
@@ -25,39 +21,32 @@ export class TranslationsMenu extends React.PureComponent {
         if(!translations || translations.length === 0)
             return null;
 
+        translations = translations.map(tr => {
+            tr.iso3166 = tr.context.locale.toUpperCase();
+            const split = tr.iso3166.split('-');
+            if(split.length > 1)
+                tr.iso3166 = split[1];
+            return tr;
+        });
+
         return (
             <>
                 <IconButton
                     aria-label="Translations"
-                    aria-owns={opened ? 'menu-translations-appbar' : undefined}
-                    aria-haspopup="true"
-                    onClick={ this.handleClick }
                     color="inherit"
                 >
                     <TranslateIcon />
                 </IconButton>
-                <Menu
-                    id="menu-translations-appbar"
-                    open={ opened }
-                    onClose={ this.handleClose }
-                    anchorEl={ anchorEl }
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    { translations.map(tr => (
-                        <MenuItem key={'tr-'+tr.id}>
-                            <Link to={tr.path}>
-                                { tr.context.locale }
-                            </Link>
-                        </MenuItem>
-                    )) }
-                </Menu>
+                { translations.map(tr => (
+                    <IconButton key={'translation-'+tr.path} component={Link} to={tr.path}>
+                        <Flag
+                            cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/flags/4x3/"
+                            styleProps={{ width: "24px", height: "24px" }}
+                            code={ tr.iso3166 }
+                            svg
+                        />
+                    </IconButton>
+                )) }
             </>
         );
     }
