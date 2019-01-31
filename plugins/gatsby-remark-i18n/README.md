@@ -26,19 +26,20 @@ as the next table describes:
 
 | Path        | New path        | context.locale   | context.canonical    | context.slug     | context.pathRegex    |
 | ----------- | --------------- | ---------------- | -------------------- | ---------------- | -------------------- |
-| /a/b.fr     | /fr/a/b         | fr               | /en/a/b              | /a/b             | /a\/b/               |
-| /a.html     | /en/a.html      | en (default)     | /en/a.html           | /a.html          | /a.html/             |
-| /index.no   | /no             | no               | /no                  | /                | //                   |
-| /index.en   | / **and** /en   | en (default)     | /en                  | /                | //                   |
+| /a/b.fr     | /fr/a/b         | fr               | null                 | /a/b             | /a\/b/               |
+| /a.html     | /en/a.html      | en (default)     | null                 | /a.html          | /a.html/             |
+| /index.no   | /no             | no               | null                 | /                | //                   |
+| /index.en   | / **and** /en   | en (default)     | en **and** null      | /                | //                   |
 
 ### Context property injection
 
 After handled by the plugin, the page's context have been injected with the following properties:
 - **locale:** The language tag indentifying the language of the page.
-- **canonical:** The canonical link to the page. This is usefull to indicate the search engines which link should be
+- **canonical:** The canonical link to the page, if the current one has not the canonical path itself, null otherwise.
+  This is usefull to indicate the search engines which link should be
   registered for the index pages.
 - **slug:** This is the relative path of your page without any indication of the language. It should be written in the
-default language ~~so that you can translate it~~ (feature not implemented yet).
+  default language ~~so that you can translate it~~ (feature not implemented yet).
 - **pathRegex:** A regular expression containing your the slug for you to filter easily in GraphQL.
 
 ### Handling the index pages

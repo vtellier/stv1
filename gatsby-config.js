@@ -38,7 +38,7 @@ module.exports = {
         {
             resolve: `gatsby-remark-i18n`,
             options: {
-                defaultLanguage: 'fr'
+                defaultLanguage: 'en'
             }
         }
         // this (optional) plugin enables Progressive Web App + Offline functionality

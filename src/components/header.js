@@ -18,11 +18,14 @@ const GenerateTranslations = (context, nodes) => {
             console.warn("Invalid page: ", curr);
             return acc;
         }
-        if(curr.context.slug === context.slug
-        && curr.context.locale !== context.locale)
+        if(curr.context.pathRegex === context.pathRegex
+        && curr.context.locale !== context.locale
+        && curr.translationId !== null)
             acc.push(curr);
         return acc;
     }, []);
+
+    console.log(filtered);
 
     return ( <TranslationsMenu translations={ filtered } />);
 }

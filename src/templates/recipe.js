@@ -8,6 +8,7 @@ export default ({ data, pageContext }) => {
 
     const { slug } = pageContext;
 
+    console.log('recipe template:', data, pageContext);
     const images = data.allFile.edges.reduce((acc,curr) => {
         const { ext, relativePath } = curr.node;
         const id = relativePath.substring( slug.length, relativePath.length-ext.length );

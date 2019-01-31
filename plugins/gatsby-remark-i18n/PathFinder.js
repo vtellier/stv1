@@ -27,6 +27,17 @@ module.exports = class PathFinder {
         return tag !== 'html' && languageTagRegex().test(tag);
     }
 
+    translate(translations) {
+        const tr = translations.slugs;
+        console.log('hey');
+        if(!tr) return;
+
+        this.translatedExplosedSlug = this.explosedSlug.map(s => {
+            if(tr[s]) return tr[s];
+            else      return s;
+        });
+    }
+
     getLocaleFromPath() {
         const localeMatches = this.page.path.match(/(.*)(\.(\w+(\-\w+)?))/);
 
@@ -45,12 +56,19 @@ module.exports = class PathFinder {
     }
 
     getSlug() {
-        return '/' + this.explosedSlug.join('/');
+        if(this.translatedExplosedSlug)
+            return '/' + this.translatedExplosedSlug.join('/');
+        else
+            return '/' + this.explosedSlug.join('/');
     }
 
     getCanonical() {
-        let slugCopy = this.explosedSlug.slice(0);
-        //if(this.getLocale() !== this.defaultLanguage)
+        let slugCopy;
+        if(this.translatedExplosedSlug)
+            slugCopy = this.translatedExplosedSlug.slice(0);
+        else
+            slugCopy = this.explosedSlug.slice(0);
+
         slugCopy.unshift(this.getLocale());
         return '/' + slugCopy.join('/');
     }
@@ -63,22 +81,28 @@ module.exports = class PathFinder {
 
     getPaths() {
         let paths = [];
-        paths.push(this.getCanonical());
-        if(this.getLocale() === this.defaultLanguage) {
-            if(this.fileName === 'index')
-                paths.push(this.getSlug());
+        paths.push( this.getCanonical() );
+        if(this.getLocale() === this.defaultLanguage && this.fileName === 'index') {
+            paths.push( this.getSlug() );
         }
         return paths;
     }
     
     getPages() {
+
+        let pages = [];
+
         return this.getPaths().map(p => {
+            const canonical = this.getCanonical();
+
             let newPage = Object.assign({},this.page);
             newPage.path              = p;
+            newPage.context = Object.assign({}, this.page.context);
             newPage.context.locale    = this.getLocale();
-            newPage.context.canonical = this.getCanonical();
+            newPage.context.canonical = canonical === p ? null : canonical;
             newPage.context.slug      = this.getSlug();
             newPage.context.pathRegex = this.getPathRegex();
+
             return newPage;
         });
     }

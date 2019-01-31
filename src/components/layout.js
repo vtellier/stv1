@@ -28,7 +28,7 @@ class Layout extends React.Component {
                         open={ menuOpen }
                         onClose={ () => { this.setState({ menuOpen:false }) } }
                         allSitePage={ allSitePage }
-                        context={context} />
+                        context={ context } />
                     <div
                         style={{
                             margin: `20px auto 0 auto`,
@@ -50,7 +50,15 @@ class Layout extends React.Component {
                         site {
                             siteMetadata { title }
                         }
-                        allSitePage {
+                        allSitePage (
+                            filter: {
+                                context: {
+                                    canonical: {
+                                        eq: null
+                                    }
+                                }
+                            }
+                        ){
                             edges {
                                 node {
                                     id
@@ -59,6 +67,7 @@ class Layout extends React.Component {
                                         slug
                                         locale
                                         canonical
+                                        pathRegex
                                     } 
                                 }
                             }
