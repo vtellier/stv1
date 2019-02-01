@@ -3,14 +3,13 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import MenuDrawer from './MenuDrawer'
-import './layout.css'
 
 class Layout extends React.Component {
     state = {
         menuOpen: false
     };
     render = () => {
-        let { children, context } = this.props;
+        let { children, pageContext } = this.props;
         let { menuOpen } = this.state;
         let template = ({ site, allSitePage, allMarkdownRemark, nonCanonical }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
@@ -22,8 +21,13 @@ class Layout extends React.Component {
             }, {});
 
             allSitePage = allSitePage.reduce((acc,curr) => {
-                curr.menuData = menuData[curr.context.pathDotLanguage];
-                acc.push(curr);
+                if(curr.context) {
+                    curr.menuData = menuData[curr.context.pathDotLanguage];
+                    acc.push(curr);
+                }
+                else {
+                    console.warn(`No context for this page:`, curr);
+                }
                 return acc;
             },[]);
 
@@ -31,7 +35,7 @@ class Layout extends React.Component {
             return (
                 <>
                     <Header
-                        context={ context }
+                        context={ pageContext }
                         siteTitle={ site.siteMetadata.title }
                         allSitePage={ allSitePage }
                         onMenuOpen={ () => this.setState({ menuOpen: true }) }
@@ -40,7 +44,7 @@ class Layout extends React.Component {
                         open={ menuOpen }
                         onClose={ () => { this.setState({ menuOpen:false }) } }
                         allSitePage={ allSitePage }
-                        context={ context }
+                        context={ pageContext }
                         menuData={menuData} />
                     <div
                         style={{
@@ -50,8 +54,8 @@ class Layout extends React.Component {
                             paddingTop: 0,
                         }}
                     >
-                    {children}
-                    <footer> © {new Date().getFullYear()} </footer>
+                        {children}
+                        <footer> © {new Date().getFullYear()} </footer>
                     </div>
                 </>
             );

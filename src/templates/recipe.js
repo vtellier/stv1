@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Img from 'gatsby-image'
-import Layout from "../components/layout"
 import rehypeReact from "rehype-react"
 
 
@@ -31,7 +30,7 @@ export default ({ data, pageContext }) => {
     }
 
     return (
-        <Layout context={pageContext}>
+        <>
             <header>
                 <h1>{ recipe.frontmatter.title }</h1>
                 { images['cover'] &&
@@ -39,8 +38,7 @@ export default ({ data, pageContext }) => {
                 }
             </header>
             { renderAst( recipe.htmlAst ) }
-            <div dangerouslySetInnerHTML={{ __html: recipe.html }}/>
-        </Layout>
+        </>
     )
 }
 

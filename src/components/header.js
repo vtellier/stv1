@@ -29,16 +29,19 @@ const GenerateTranslations = (context, nodes) => {
 }
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+    appBar: {
+        position: 'relative'
+    },
+    root: {
+        flexGrow: 1,
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
 };
 
 class Header extends React.PureComponent {
@@ -61,7 +64,7 @@ class Header extends React.PureComponent {
         const translations = GenerateTranslations(context, allSitePage);
 
         return (
-                <AppBar position="static">
+                <AppBar position="fixed" color="primary" className={styles.appBar}>
                     <Toolbar>
                         <IconButton
                             color="inherit"

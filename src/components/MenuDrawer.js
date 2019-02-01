@@ -1,6 +1,14 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import Drawer from '@material-ui/core/Drawer';
+import {
+    Link
+} from 'gatsby'
+import {
+    Drawer,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText
+} from '@material-ui/core';
 
 class MenuTree {
     constructor(key) {
@@ -45,25 +53,31 @@ class MenuTree {
                 to={ p.path }
                 title={p.menuData.menuTitle}
             >
-                { p.menuData.menuText }
+                <ListItemText
+                    primary={ p.menuData.menuText }
+                />
             </Link>
         );
     }
     renderChildren() {
         return (
-            <ul>
+            <List component="div">
                 { Object.values(this.children).map(tree => (
-                    <li key={tree.key}> { tree.render() } </li>
+                    <ListItem key={tree.key}>
+                        { tree.render() }
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         );
     }
     render() {
         return (
-            <>
-                { this.renderPage() }
+            <List
+                component="nav"
+                subheader={ this.renderPage() }
+            >
                 { this.renderChildren() }
-            </>
+            </List>
         );
     }
 }
