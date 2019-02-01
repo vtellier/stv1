@@ -13,6 +13,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 
 const GenerateTranslations = (context, nodes) => {
+    if(!context)
+        return null;
+
     const filtered = nodes.reduce((acc,curr) => {
         if(!curr.context) {
             console.warn("Invalid page: ", curr);
@@ -47,21 +50,21 @@ const styles = {
 class Header extends React.PureComponent {
     render = () => {
         let {
-            context,
+            pageContext,
             siteTitle,
             classes,
             onMenuOpen,
             allSitePage
         } = this.props;
 
-        const homePage = allSitePage.reduce((acc,curr) => {
+        const homePage = pageContext && allSitePage.reduce((acc,curr) => {
             if(curr.context.slug === '/'
-            && curr.context.locale === context.locale)
+            && curr.context.locale === pageContext.locale)
                 acc = curr;
             return acc;
-        }, {});
+        }, {}) || { path: '/' };
 
-        const translations = GenerateTranslations(context, allSitePage);
+        const translations = GenerateTranslations(pageContext, allSitePage);
 
         return (
                 <AppBar position="fixed" color="primary" className={styles.appBar}>

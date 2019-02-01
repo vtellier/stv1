@@ -35,7 +35,7 @@ class Layout extends React.Component {
             return (
                 <>
                     <Header
-                        context={ pageContext }
+                        pageContext={ pageContext }
                         siteTitle={ site.siteMetadata.title }
                         allSitePage={ allSitePage }
                         onMenuOpen={ () => this.setState({ menuOpen: true }) }
@@ -44,7 +44,7 @@ class Layout extends React.Component {
                         open={ menuOpen }
                         onClose={ () => { this.setState({ menuOpen:false }) } }
                         allSitePage={ allSitePage }
-                        context={ pageContext }
+                        pageContext={ pageContext }
                         menuData={menuData} />
                     <div
                         style={{

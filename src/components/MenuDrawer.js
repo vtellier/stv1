@@ -83,10 +83,12 @@ class MenuTree {
 }
 
 class MenuDrawer extends React.PureComponent {
-    filterPageData(allSitePage, context) {
+    filterPageData(allSitePage, pageContext) {
+        if(!pageContext)
+            return [];
         return allSitePage.reduce((acc,curr) => {
             if(!curr.context
-            || curr.context.locale !== context.locale
+            || curr.context.locale !== pageContext.locale
             || curr.translationId === null
             || curr.menuData === null || curr.menuData === undefined)
                 return acc;
@@ -106,10 +108,10 @@ class MenuDrawer extends React.PureComponent {
             open,
             onClose,
             allSitePage,
-            context
+            pageContext
         } = this.props;
 
-        allSitePage = this.filterPageData(allSitePage, context);
+        allSitePage = this.filterPageData(allSitePage, pageContext);
         allSitePage.sort((e1,e2) => e1.menuData.menuOrder < e2.menuData.menuOrder ? -1 : 0);
 
         let menuTree = new MenuTree();
