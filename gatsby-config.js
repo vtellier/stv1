@@ -36,7 +36,7 @@ module.exports = {
         },
         `gatsby-transformer-remark`,
         {
-            resolve: `gatsby-remark-i18n`,
+            resolve: `gatsby-plugin-intl-url`,
             options: {
                 defaultLanguage: 'en'
             }

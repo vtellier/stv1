@@ -1,0 +1,15 @@
+{
+    "fr": {
+        "slugs": {
+            "recipes": "recettes",
+            "standard": "standard",
+            "american": "americain",
+            "italian": "italien",
+            "brousse-avocado": "brousse-avocat",
+            "roquefort": "roquefort",
+            "truffle": "truffe",
+            "norman": "normand",
+            "marined-bell-pepper": "poivrons-marines"
+        }
+    }
+}

@@ -10,6 +10,7 @@
     "cjs-iso-639": "^1.1.2",
     "gatsby": "^2.0.106",
     "gatsby-image": "^2.0.29",
+    "gatsby-plugin-intl-url": "^1.0.1",
     "gatsby-plugin-manifest": "^2.0.15",
     "gatsby-plugin-offline": "^2.0.22",
     "gatsby-plugin-react-helmet": "^3.0.2",
