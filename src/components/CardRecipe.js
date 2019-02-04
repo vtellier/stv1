@@ -1,24 +1,14 @@
 import React from 'react';
-import { 
-    Link
-} from 'gatsby';
 import {
     Card,
     CardMedia,
-    CardActionArea,
-    CardContent,
-    CardActions,
-    Button
+    CardContent
 } from "@material-ui/core"
 
 class CardRecipe extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
     render() {
         let {
             title,
-            link,
             image
         } = this.props;
         return (
