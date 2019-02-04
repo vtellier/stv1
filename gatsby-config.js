@@ -18,13 +18,14 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `gatsby-starter-default`,
-                short_name: `starter`,
+                name: `Steak Tartare`,
+                short_name: `Tartare`,
                 start_url: `/`,
-                background_color: `#663399`,
-                theme_color: `#663399`,
-                display: `minimal-ui`,
-                icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+                background_color: `#FFFFFF`,
+                theme_color: `#000`,
+                display: `standalone`,
+                icon: `src/images/icon.png`, // This path is relative to the root of the site.
+                include_favicon: true
             },
         },
         {
@@ -40,19 +41,6 @@ module.exports = {
             options: {
                 defaultLanguage: 'en'
             }
-        },
-        {
-        resolve: `@wapps/gatsby-plugin-material-ui`,
-            options: {
-                theme: {
-                    palette: {
-                        type: 'light'
-                    },
-                    typography: {
-                        useNextVariants: true,
-                    }
-                }
-            },
         },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
