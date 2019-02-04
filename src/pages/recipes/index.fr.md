@@ -1,7 +1,7 @@
 ---
 title: "Nos recettes testées et approuvées"
 date: "2019-01-29"
-template: "index.js"
+template: "recipe-list.js"
 menuOrder: 1
 menuText: "Nos recettes"
 menuTitle: "La liste de nos recettes"

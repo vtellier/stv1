@@ -1,11 +1,13 @@
 ---
 title: "Our tested and approved recipes"
 date: "2019-01-29"
-template: "index.js"
+template: "recipe-list.js"
 menuOrder: 1
 menuText: "Recipes"
 menuTitle: "The list of our recipes"
 ---
+
+# Recipes
 
 Find here all the recipes we have produced for you. Every single recipe has been
 teseted and approved, to insure you solid advices and serious quality.
