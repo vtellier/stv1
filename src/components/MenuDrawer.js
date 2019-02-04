@@ -6,14 +6,14 @@ import {
     Drawer,
     List,
     ListItem,
-    ListItemIcon,
+//    ListItemIcon,
     ListItemText
 } from '@material-ui/core';
 
 class MenuTree {
-    constructor(key) {
+    constructor(key, link) {
         this.key = key || '';
-        this.page = null;
+        this.page = link || null;
         this.children = {};
     }
     getChild(link) {
@@ -34,7 +34,7 @@ class MenuTree {
             const link = explodedPath.shift();
             let child = this.children[link];
             if(!child) {
-                child = new MenuTree(this.key + '/' + link);
+                child = new MenuTree(this.key + '/' + link, link);
                 this.children[link] = child;
             }
             child.addPage(page, explodedPath.join('/'));
@@ -43,25 +43,25 @@ class MenuTree {
             this.page = page;
     }
     renderPage() {
-        if(this.page === null)
-            return null;
-
         const p = this.page;
-        return (
-            <Link
-                key={'menu-link-'+p.context.slug}
-                to={ p.path }
-                title={p.menuData.menuTitle}
-            >
-                <ListItemText
-                    primary={ p.menuData.menuText }
-                />
-            </Link>
-        );
+        if(p === null)
+            return null;
+        else if(typeof p === 'string')
+            return (<span>{ p }</span>);
+        else
+            return (
+                <Link
+                    key={'menu-link-'+p.context.slug}
+                    to={ p.path }
+                    title={p.menuData.menuTitle}
+                >
+                    <ListItemText primary={ p.menuData.menuText } />
+                </Link>
+            );
     }
     renderChildren() {
         return (
-            <List component="div">
+            <List>
                 { Object.values(this.children).map(tree => (
                     <ListItem key={tree.key}>
                         { tree.render() }
@@ -71,6 +71,11 @@ class MenuTree {
         );
     }
     render() {
+        const childrenArray = Object.values(this.children);
+
+        if(childrenArray.length === 0)
+            return this.renderPage();
+        
         return (
             <List
                 component="nav"

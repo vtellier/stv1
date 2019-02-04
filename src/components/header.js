@@ -57,17 +57,20 @@ class Header extends React.PureComponent {
             allSitePage
         } = this.props;
 
-        const homePage = pageContext && allSitePage.reduce((acc,curr) => {
-            if(curr.context.slug === '/'
-            && curr.context.locale === pageContext.locale)
-                acc = curr;
-            return acc;
-        }, {}) || { path: '/' };
+        let homePage = { path: '/' };
+        if(pageContext) {
+            homePage = allSitePage.reduce((acc,curr) => {
+                if(curr.context.slug === '/'
+                && curr.context.locale === pageContext.locale)
+                    acc = curr;
+                return acc;
+            }, {});
+        }
 
         const translations = GenerateTranslations(pageContext, allSitePage);
 
         return (
-                <AppBar position="fixed" color="primary" className={styles.appBar}>
+                <AppBar position="fixed" color="primary" className={classes.appBar}>
                     <Toolbar>
                         <IconButton
                             color="inherit"
