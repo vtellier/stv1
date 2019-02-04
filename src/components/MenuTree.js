@@ -4,17 +4,16 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 
 export class MenuRender extends React.PureComponent {
     render = () => {
+        const onClick = this.props.onClick;
         const tree = this.props.tree;
 
         const p = tree.page;
         const children = Object.values(tree.children);
 
-        console.log(p, children);
-
         return (
             <>
                 { p !== null && (
-                    <ListItem button>
+                    <ListItem button onClick={onClick}>
                         { typeof p === 'string' &&
                             <span>{p}</span>
                         }
@@ -29,9 +28,9 @@ export class MenuRender extends React.PureComponent {
                     </ListItem>
                 )}
                 { children.length > 0 && (
-                    <List component="nav" style={{}}>
+                    <List component="nav" style={{paddingLeft:'1em'}}>
                     { children.map(child => (
-                            <MenuRender key={child.key} tree={child} />
+                            <MenuRender key={child.key} tree={child} onClick={onClick} />
                         )) }
                     </List>
                 ) }

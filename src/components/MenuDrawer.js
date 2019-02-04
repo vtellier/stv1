@@ -49,7 +49,9 @@ class MenuDrawer extends React.PureComponent {
                 <IconButton onClick={ onClose }>
                     <ChevronLeftIcon />
                 </IconButton>
-                <MenuRender tree={menuTree} />
+                <div role="button" onClick={onClose}>
+                    <MenuRender tree={menuTree} />
+                </div>
             </Drawer>
         );
     }
