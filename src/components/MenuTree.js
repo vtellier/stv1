@@ -1,15 +1,46 @@
 import React from 'react'
-import {
-    Link
-} from 'gatsby'
-import {
-    List,
-    ListItem,
-    ListItemText
-} from '@material-ui/core';
+import { Link } from 'gatsby'
+import { List, ListItem, ListItemText } from '@material-ui/core'; 
 
+export class MenuRender extends React.PureComponent {
+    render = () => {
+        const tree = this.props.tree;
 
-export default class MenuTree {
+        const p = tree.page;
+        const children = Object.values(tree.children);
+
+        console.log(p, children);
+
+        return (
+            <>
+                { p !== null && (
+                    <ListItem button>
+                        { typeof p === 'string' &&
+                            <span>{p}</span>
+                        }
+                        { typeof p === 'object' &&
+                            <Link
+                                to={ p.path }
+                                title={p.menuData.menuTitle}
+                            >
+                                <ListItemText> { p.menuData.menuText } </ListItemText>
+                            </Link>
+                        }
+                    </ListItem>
+                )}
+                { children.length > 0 && (
+                    <List component="nav" style={{}}>
+                    { children.map(child => (
+                            <MenuRender key={child.key} tree={child} />
+                        )) }
+                    </List>
+                ) }
+            </>
+        );
+    }
+}
+
+export class MenuTree {
     constructor(key, link) {
         this.key = key || '';
         this.page = link || null;
@@ -41,47 +72,7 @@ export default class MenuTree {
         else
             this.page = page;
     }
-    renderPage() {
-        const p = this.page;
-        if(p === null)
-            return null;
-        else if(typeof p === 'string')
-            return (<span>{ p }</span>);
-        else
-            return (
-                <Link
-                    key={'menu-link-'+p.context.slug}
-                    to={ p.path }
-                    title={p.menuData.menuTitle}
-                >
-                    <ListItemText primary={ p.menuData.menuText } />
-                </Link>
-            );
-    }
-    renderChildren() {
-        return (
-            <List>
-                { Object.values(this.children).map(tree => (
-                    <ListItem key={tree.key}>
-                        { tree.render() }
-                    </ListItem>
-                ))}
-            </List>
-        );
-    }
-    render() {
-        const childrenArray = Object.values(this.children);
-
-        if(childrenArray.length === 0)
-            return this.renderPage();
-        
-        return (
-            <List
-                component="nav"
-                subheader={ this.renderPage() }
-            >
-                { this.renderChildren() }
-            </List>
-        );
-    }
 }
+
+export default { MenuTree, MenuRender };
+

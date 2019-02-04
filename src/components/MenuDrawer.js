@@ -1,8 +1,10 @@
 import React from 'react'
-import MenuTree from './MenuTree'
+import { MenuRender, MenuTree } from './MenuTree'
 import {
-    Drawer
+    Drawer,
+    IconButton
 } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 class MenuDrawer extends React.PureComponent {
     filterPageData(allSitePage, pageContext) {
@@ -44,7 +46,10 @@ class MenuDrawer extends React.PureComponent {
                 open={open}
                 onClose={onClose}
             >
-                { menuTree.render() }
+                <IconButton onClick={ onClose }>
+                    <ChevronLeftIcon />
+                </IconButton>
+                <MenuRender tree={menuTree} />
             </Drawer>
         );
     }
