@@ -20,6 +20,9 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
   },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 class Layout extends React.Component {
