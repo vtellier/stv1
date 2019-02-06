@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Header from './header'
 import MenuDrawer from './MenuDrawer'
+import './layout.css'
 
 const theme = createMuiTheme({
   palette: {
@@ -66,7 +67,8 @@ class Layout extends React.Component {
                         onClose={ () => { this.setState({ menuOpen:false }) } }
                         allSitePage={ allSitePage }
                         pageContext={ pageContext }
-                        menuData={menuData} />
+                        menuData={ menuData }
+                    />
                     <div
                         style={{
                             margin: `20px auto 0 auto`,
