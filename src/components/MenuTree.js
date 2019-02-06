@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { List, ListItem, ListItemText } from '@material-ui/core'; 
+import { List, ListItem, ListItemText, Divider } from '@material-ui/core'; 
 
 export class MenuRender extends React.PureComponent {
     render = () => {
@@ -28,11 +28,14 @@ export class MenuRender extends React.PureComponent {
                     </ListItem>
                 )}
                 { children.length > 0 && (
-                    <List component="nav" style={{paddingLeft:'1em'}}>
-                    { children.map(child => (
-                            <MenuRender key={child.key} tree={child} onClick={onClick} />
-                        )) }
-                    </List>
+                    <>
+                        <Divider />
+                        <List component="nav" style={{paddingLeft:'1em'}}>
+                        { children.map(child => (
+                                <MenuRender key={child.key} tree={child} onClick={onClick} />
+                            )) }
+                        </List>
+                    </>
                 ) }
             </>
         );
