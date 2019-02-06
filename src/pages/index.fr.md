@@ -1,7 +1,7 @@
 ---
 title: "Bienvenue!"
 date: "2019-01-29"
-template: "index.js"
+template: "recipe-list.js"
 menuOrder: 1
 menuText: "Accueil"
 menuTitle: "Cliquez ici pour revenir vers la page d'accueil du site"
