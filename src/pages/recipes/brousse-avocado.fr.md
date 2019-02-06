@@ -7,7 +7,7 @@ menuText: "Le Brousse-Avocat sans câpre"
 menuTitle: "Une combinaison exceptionnelle à tester à tout prix!"
 ---
 
-Dans la lignée des **recettes méditérranéennes**, et après le [tartare à l'italienne](/fr/recettes/italien), voici le tartare à la brousse et à l'avocat !
+Dans la lignée des **recettes méditérranéennes**, et après le [tartare à l'italienne](/fr/recettes/italien "Cliquez ici pour consulter cette autre recette"), voici le tartare à la brousse et à l'avocat !
 Cette recette **sans câpre** se déguste de préférence sur une terrasse ensoleillée, accompagné d'une salade et quelques pommes de terre frites.
 
 La brousse est un _fromage du bas languedoc_, plus ou moins similaire à la _Ricotta_ Italienne ou au _Brocciu_ Corse. Il est responsable de toute la fraicheur du plat.

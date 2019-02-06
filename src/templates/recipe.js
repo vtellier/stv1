@@ -3,12 +3,21 @@ import { graphql, Link } from "gatsby"
 import Img from 'gatsby-image'
 import rehypeReact from "rehype-react"
 
+const createElement = (component, props, children) => {
+    console.log('component',component);
+    if(component === 'a') {
+        component = Link;
+        if(props && props.href) {
+            props.to = props.href;
+            delete props.href;
+        }
+        console.log(props);
+    }
+    return React.createElement(component, props, children);
+};
 
 const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  components: {
-      a: Link,
-  }
+  createElement,
 }).Compiler
 
 export default ({ data, pageContext }) => {
