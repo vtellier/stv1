@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 import rehypeReact from "rehype-react"
 import CardRecipe from '../components/CardRecipe.js'
 
