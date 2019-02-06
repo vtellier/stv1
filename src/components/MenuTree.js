@@ -1,8 +1,13 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { List, ListItem, ListItemText, Divider } from '@material-ui/core'; 
 
 export class MenuRender extends React.PureComponent {
+    onClick = (path) => {
+        if(this.props.onClick)
+            this.props.onClick();
+        navigate(path);
+    }
     render = () => {
         const onClick = this.props.onClick;
         const tree = this.props.tree;
@@ -13,17 +18,12 @@ export class MenuRender extends React.PureComponent {
         return (
             <>
                 { p !== null && (
-                    <ListItem button onClick={onClick}>
+                    <ListItem button onClick={() => this.onClick(p.path) }>
                         { typeof p === 'string' &&
                             <span>{p}</span>
                         }
                         { typeof p === 'object' &&
-                            <Link
-                                to={ p.path }
-                                title={p.menuData.menuTitle}
-                            >
-                                <ListItemText> { p.menuData.menuText } </ListItemText>
-                            </Link>
+                            <ListItemText> { p.menuData.menuText } </ListItemText>
                         }
                     </ListItem>
                 )}
