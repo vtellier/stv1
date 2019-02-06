@@ -5,25 +5,25 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@material-ui/core": "^3.9.1",
+    "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "@wapps/gatsby-plugin-material-ui": "^1.2.0",
     "cjs-iso-639": "^1.1.2",
-    "gatsby": "^2.0.106",
+    "gatsby": "^2.0.115",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-intl-url": "^1.0.1",
-    "gatsby-plugin-manifest": "^2.0.15",
+    "gatsby-plugin-manifest": "^2.0.17",
     "gatsby-plugin-offline": "^2.0.22",
-    "gatsby-plugin-react-helmet": "^3.0.2",
-    "gatsby-plugin-sharp": "^2.0.19",
-    "gatsby-source-filesystem": "^2.0.18",
-    "gatsby-transformer-remark": "^2.2.2",
+    "gatsby-plugin-react-helmet": "^3.0.6",
+    "gatsby-plugin-sharp": "^2.0.20",
+    "gatsby-source-filesystem": "^2.0.20",
+    "gatsby-transformer-remark": "^2.2.4",
     "gatsby-transformer-sharp": "^2.1.13",
     "ietf-language-tag-regex": "0.0.5",
     "prop-types": "^15.6.2",
-    "react": "^16.6.3",
+    "react": "^16.8.0",
     "react-country-flag": "^1.0.1",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
     "rehype-react": "^3.1.0"
   },
@@ -40,7 +40,7 @@
     "deploy": "./deploy.sh"
   },
   "devDependencies": {
-    "prettier": "^1.16.2"
+    "prettier": "^1.16.4"
   },
   "repository": {
     "type": "git",
