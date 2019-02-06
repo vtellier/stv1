@@ -1,8 +1,26 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Header from './header'
 import MenuDrawer from './MenuDrawer'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#484848',
+      main: '#212121',
+      dark: '#000000',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#f05545',
+      main: '#b71c1c',
+      dark: '#7f0000',
+      contrastText: '#000',
+    },
+  },
+});
 
 class Layout extends React.Component {
     state = {
@@ -33,7 +51,7 @@ class Layout extends React.Component {
 
 
             return (
-                <>
+                <MuiThemeProvider theme={theme}>
                     <Header
                         pageContext={ pageContext }
                         siteTitle={ site.siteMetadata.title }
@@ -57,7 +75,7 @@ class Layout extends React.Component {
                         {children}
                         <footer> © {new Date().getFullYear()} </footer>
                     </div>
-                </>
+                </MuiThemeProvider>
             );
         }
         return (
