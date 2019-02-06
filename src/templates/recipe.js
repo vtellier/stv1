@@ -4,14 +4,12 @@ import Img from 'gatsby-image'
 import rehypeReact from "rehype-react"
 
 const createElement = (component, props, children) => {
-    console.log('component',component);
     if(component === 'a') {
         component = Link;
         if(props && props.href) {
             props.to = props.href;
             delete props.href;
         }
-        console.log(props);
     }
     return React.createElement(component, props, children);
 };
