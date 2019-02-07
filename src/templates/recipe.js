@@ -38,12 +38,12 @@ export default ({ data, pageContext }) => {
 
     return (
         <>
-            <header>
+            <div>
                 <h1>{ recipe.frontmatter.title }</h1>
                 { images['cover'] &&
                     <Img fixed={images['cover'].childImageSharp.fixed} />
                 }
-            </header>
+            </div>
             { renderAst( recipe.htmlAst ) }
         </>
     )
