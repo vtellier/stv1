@@ -15,7 +15,7 @@ Le ketchup et la moutarde, qui sont des ingrédients typiques des fastfoods nous
 
 Si vous n'aimez pas les câpres, vous pouvez bien-sûre vous en passer.
 
-## Préparation
+# Préparation
 - Coupez les câpres et les cornichons en petits morceaux, ce sera probablement l'étape la plus longue !
 - Travaillez le steak haché avec une fourchette pour en faire un petit tas.
 - Glissez-y le jaune d'oeuf et commencez à mélanger le tout.

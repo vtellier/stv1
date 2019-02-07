@@ -10,7 +10,7 @@ menuTitle: "Une expérience déconseillée"
 Cette recette s'adresse aux passionés du steak tartare, qui cherchent l'originalité et le renouvellement. Cette recette luxueuse et surprenante est pourtant bien savoureuse pour quiconque apprécie la truffe. En effet, la truffe est un champignon très cher et très réputé, mais son goût reste assez spécial !
 Par ailleurs, ce champignon se trouve aussi sous forme de brisure de truffe plus honéreuse mais pas moins idéale pour notre cher steak.
 
-## Ingrédients
+# Ingrédients
 
 
 | Ingrédient	    | Quantité    |

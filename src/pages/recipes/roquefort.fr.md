@@ -14,19 +14,7 @@ parmis les fromages, le _steak tartare_ fait parti des mets à sensations fortes
 L'alliance de cet ingrédient avec notre plat préféré est alors certes audacieuse
 mais s'avert toute fois surprenante.
 
-## Préparation
-
-1. Mettez en forme la viande et déposez la dans votre assiette.
-1. Déposez les **câpres** autour du steak
-1. Découpez les **cornichons** en fins morceaux, et joignez-les aux câpres
-1. Faites en de même avec le **Roquefort**
-1. Émincez maintenant le demi-oignon
-1. Vous pouvez maintenant **mélanger votre steak** jusqu'à avoir un mélange homogène
-1. Ajoutez un trait ou deux d'**huile d'olive** sans abuser, elle risquerait de masquer le goût du Roquefort
-1. Mélangez à nouveau le steak
-1. Assaisonnez, c'est prêt !
-
-## Ingrédients
+# Ingrédients
 
 | Ingrédient	    | Quantité        |
 | ----------------- | -----------     |
@@ -39,4 +27,15 @@ mais s'avert toute fois surprenante.
 | Roquefort         | 30 à 50gr       |
 | Sel, poivre       | Selon les goûts |
 
+# Préparation
+
+1. Mettez en forme la viande et déposez la dans votre assiette.
+1. Déposez les **câpres** autour du steak
+1. Découpez les **cornichons** en fins morceaux, et joignez-les aux câpres
+1. Faites en de même avec le **Roquefort**
+1. Émincez maintenant le demi-oignon
+1. Vous pouvez maintenant **mélanger votre steak** jusqu'à avoir un mélange homogène
+1. Ajoutez un trait ou deux d'**huile d'olive** sans abuser, elle risquerait de masquer le goût du Roquefort
+1. Mélangez à nouveau le steak
+1. Assaisonnez, c'est prêt !
 

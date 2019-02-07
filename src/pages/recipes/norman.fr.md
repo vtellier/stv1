@@ -11,7 +11,11 @@ Ce Steak Tartare venu tout droit de Normandie se montre assez exotique avec la p
 
 Cette recette s'adresse aux amateurs de sucré/salé, et qui aprécient l'originalité !
 
-## Préparation
+# Ingrédients
+
+TODO
+
+# Préparation
 
 1. Découpez le quartier de **pomme golden** en de petits morceaux de 5 mm environ.
 1. De même, émincez l'oignon jusqu'à obtenir au maximum la même quantité que de pomme.
@@ -26,8 +30,4 @@ Cette recette s'adresse aux amateurs de sucré/salé, et qui aprécient l'origin
 1. Selon vos goûts vous pouvez ajouter la sauce anglaise (**Worcestershire**),
    avec modération pour éviter de rendre le plat écoeurant.
 1. Versez le shooter de **calva**, assaisonnez, mélangez, et **dégustez** !
-
-## Ingrédients
-
-TODO
 

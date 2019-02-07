@@ -18,7 +18,7 @@ We offer you to prepare as described below, but you are of course free to procee
 If you really want to make it fast, you should probably go for the _american tartar_, this one has been designed to be as fast as possible as well as impossible to fail.
 
 
-## Preparation
+# Preparation
 - Put the **choped meat** in a plate in a circle form
 - Put the **egg yolk** in a small hole you will have digged on top of the meat
 - Add the **capers** and the **pickles**, both choped around the beaf
