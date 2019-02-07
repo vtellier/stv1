@@ -33,12 +33,12 @@ Enfin, les olives noires détiennent la base salée du plat en remplacement les 
 - Dénoyauter les **olives**, et découpez les finement
 - Découpez l'**avocat** en petits morceaux d'environ 5mm à 1cm de longueur
 - Faites en de même avec la **brousse**
-- Rapez ensuite le **parmesan**
+- Râpez ensuite le **parmesan**
 - Émincez l'**échalotte** finement
 - Vous pouvez maintenant mettre en forme la viande et la déposer dans l'assiette.
 - Ajoutez le **jaune d'oeuf** sur le steak
 - Vous pouvez alors mélangez la viande avec tous les ingrédients précédemment préparés.
-- Ajoutez les **deux traits d'huile d'olive**, vous pouvez insister si bon vous semble, il faut que la viande soit bien lubrifiée !
+- Tout en mélangeant, ajoutez les **deux traits d'huile d'olive**, ou plus si vous aimez !
 - Mélangez à nouveau le steak
 - Assaisonnez et Dégustez !
 
