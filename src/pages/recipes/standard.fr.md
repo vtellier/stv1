@@ -17,7 +17,7 @@ Nous vous proposons d'en faire la préparation comme décrit ci-après, mais bie
 
 Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américaine, c'est une recette facile et extrêmement rapide que l'on ne peut pas rater !
 
-## Préparation
+# Préparation
 - Déposer la **viande hachée** dans l'assiette en lui donnant une forme de demie-sphère
 - Posez le **jaune d'oeuf** dans un creux que vous aurez fait au sommet du steak
 - Ajouter ensuite les **câpres** et les **cornichons** préalablement hachés autour du steak dans la disposition qui vous plait
@@ -29,9 +29,7 @@ Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américai
 - Ajoutez le trait d'**huile d'olive** qui lubrifiera bien la viande, si vous souhaitez mettre de la **moutarde** vous pouvez le faire maintenant.
 - Mélangez à nouveau, et c'est prêt !
 
-<div class="ingredients">
-
-## Ingrédients
+# Ingrédients
 
 | Ingrédient	    | Quantité    |
 | ----------------- | ----------- |
@@ -45,6 +43,4 @@ Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américai
 | Sauce anglaise    | 1/4 cac max |
 | Sel, poivre       | 1 pincée    |
 | Tabasco           | 1/2 cac max |
-
-</div>
 

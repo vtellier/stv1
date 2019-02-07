@@ -1,26 +1,17 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { Paper, Divider, withStyles } from '@material-ui/core'
+import { Divider } from '@material-ui/core'
 
 import Header from './header'
 import MenuDrawer from './MenuDrawer'
 import './layout.css'
-
-const styles = {
-    steakBody: {
-        margin: `20px auto 0 auto`,
-        maxWidth: 960,
-        padding: `0px 1.0875rem 1.45rem`,
-        paddingTop: 0,
-    }
-};
 
 class Layout extends React.PureComponent {
     state = {
         menuOpen: false
     };
     render = () => {
-        let { children, pageContext, classes } = this.props;
+        let { children, pageContext } = this.props;
         let { menuOpen } = this.state;
         let template = ({ site, allSitePage, allMarkdownRemark, nonCanonical }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
@@ -58,9 +49,7 @@ class Layout extends React.PureComponent {
                         pageContext={ pageContext }
                         menuData={ menuData }
                     />
-                    <Paper className={classes.steakBody} >
-                        {children}
-                    </Paper>
+                    {children}
                     <footer style={{textAlign:'center',padding:'1em'}}>
                         <Divider style={{margin:'1em'}} />
                         © {new Date().getFullYear()}
@@ -119,4 +108,4 @@ class Layout extends React.PureComponent {
     }
 }
 
-export default withStyles(styles)(Layout)
+export default Layout

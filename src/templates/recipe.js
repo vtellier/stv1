@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import Img from 'gatsby-image'
 import rehypeReact from "rehype-react"
 import Layout from '../components/layout'
+import { Paper, Grid } from '@material-ui/core'
 
 const createElement = (component, props, children) => {
     if(component === 'a') {
@@ -37,15 +38,39 @@ export default ({ data, pageContext }) => {
         console.warn(`The recipe ${pageContext.pathDotLanguage} has no picture!`);
     }
 
+    let sections = recipe.htmlAst.children.reduce((acc,curr) => {
+        if(curr.type === 'element' && curr.tagName === 'h1')
+            acc.push({type:'root',children:[], key:'section-'+acc.length});
+        acc[acc.length-1].children.push(curr);
+        return acc;
+    },[{type:'root',children:[], key:'section-0'}]);
+    
+    let size = 12 / sections.length;
+
     return (
         <Layout pageContext={pageContext}>
-            <div>
-                <h1>{ recipe.frontmatter.title }</h1>
-                { images['cover'] &&
-                    <Img fixed={images['cover'].childImageSharp.fixed} />
-                }
-            </div>
-            { renderAst( recipe.htmlAst ) }
+            <Grid
+                container
+                justify="center"
+                spacing={24}
+            >
+                <Grid item lg={size}>
+                    <Paper>
+                        <h1>{ recipe.frontmatter.title }</h1>
+                        { images['cover'] &&
+                            <Img fixed={images['cover'].childImageSharp.fixed} />
+                        }
+                        { renderAst(sections.shift()) }
+                    </Paper>
+                </Grid>
+                { sections.map(s => (
+                    <Grid lg={size} item key={s.key}>
+                        <Paper>
+                            {renderAst(s)}
+                        </Paper>
+                    </Grid>
+                )) }
+            </Grid>
         </Layout>
     )
 }
