@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Img from 'gatsby-image'
 import rehypeReact from "rehype-react"
+import Layout from '../components/layout'
 
 const createElement = (component, props, children) => {
     if(component === 'a') {
@@ -37,7 +38,7 @@ export default ({ data, pageContext }) => {
     }
 
     return (
-        <>
+        <Layout pageContext={pageContext}>
             <div>
                 <h1>{ recipe.frontmatter.title }</h1>
                 { images['cover'] &&
@@ -45,7 +46,7 @@ export default ({ data, pageContext }) => {
                 }
             </div>
             { renderAst( recipe.htmlAst ) }
-        </>
+        </Layout>
     )
 }
 
