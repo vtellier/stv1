@@ -42,6 +42,31 @@ module.exports = {
                 defaultLanguage: 'en'
             }
         },
+        {
+        resolve: `@wapps/gatsby-plugin-material-ui`,
+            options: {
+                productionPrefix: 'c',
+                theme: {
+                    palette: {
+                        primary: {
+                            dark:         '#000000',
+                            light:        '#484848',
+                            main:         '#212121',
+                            contrastText: '#ffffff',
+                        },
+                        secondary: {
+                            dark:         '#7f0000',
+                            light:        '#f05545',
+                            main:         '#b71c1c',
+                            contrastText: '#ffffff',
+                        },
+                    },
+                    typography: {
+                        useNextVariants: true,
+                    },
+                },
+            },
+        },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
         // 'gatsby-plugin-offline',
