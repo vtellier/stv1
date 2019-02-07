@@ -46,6 +46,7 @@ export default ({ data, pageContext }) => {
     },[{type:'root',children:[], key:'section-0'}]);
     
     let size = 12 / sections.length;
+    console.log('size:', size, sections.length);
 
     return (
         <Layout pageContext={pageContext}>
@@ -53,19 +54,20 @@ export default ({ data, pageContext }) => {
                 container
                 justify="center"
                 spacing={24}
+                style={{padding:'24px'}}
             >
                 <Grid item lg={size}>
-                    <Paper>
+                    <Paper style={{padding:'1em'}}>
                         <h1>{ recipe.frontmatter.title }</h1>
                         { images['cover'] &&
-                            <Img fixed={images['cover'].childImageSharp.fixed} />
+                            <Img fluid={images['cover'].childImageSharp.fluid} />
                         }
                         { renderAst(sections.shift()) }
                     </Paper>
                 </Grid>
                 { sections.map(s => (
                     <Grid lg={size} item key={s.key}>
-                        <Paper>
+                        <Paper style={{padding:'1em'}}>
                             {renderAst(s)}
                         </Paper>
                     </Grid>
@@ -88,8 +90,8 @@ export const query = graphql`
                     relativePath
                     ext
                     childImageSharp {
-                        fixed(width: 380, height: 285) {
-                            ...GatsbyImageSharpFixed
+                        fluid(maxWidth: 500) {
+                            ...GatsbyImageSharpFluid
                         }
                     }
                 }

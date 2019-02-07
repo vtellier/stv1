@@ -17,18 +17,6 @@ Nous vous proposons d'en faire la préparation comme décrit ci-après, mais bie
 
 Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américaine, c'est une recette facile et extrêmement rapide que l'on ne peut pas rater !
 
-# Préparation
-- Déposer la **viande hachée** dans l'assiette en lui donnant une forme de demie-sphère
-- Posez le **jaune d'oeuf** dans un creux que vous aurez fait au sommet du steak
-- Ajouter ensuite les **câpres** et les **cornichons** préalablement hachés autour du steak dans la disposition qui vous plait
-- Faites de même pour l'**oignon** (ou l'**échalote**) finement émincé
-- Ajoutez le **tabasco** si vous aimez cela, mais gradez à l'esprit qu'il joue aussi un rôle de désinfectant qu'il ne faut surtout pas négliger lorsque vous utilisez une viande dont vous ne connaissez pas l'origine.
-- Selon vos goûts vous pouvez ajouter la sauce anglaise (**Worcestershire**), mais faites attention à ne pas trop en abuser car au delas d'une demie-cuillière à café pour 200 grammes de viande cela donne un goût amer et trop salé.
-- Assaisonnez
-- Mélangez votre steak jusqu'à avoir un résultat homogène
-- Ajoutez le trait d'**huile d'olive** qui lubrifiera bien la viande, si vous souhaitez mettre de la **moutarde** vous pouvez le faire maintenant.
-- Mélangez à nouveau, et c'est prêt !
-
 # Ingrédients
 
 | Ingrédient	    | Quantité    |
@@ -43,4 +31,16 @@ Si vous êtes vraiment pressé, nous vous recommandons le tartare à l'américai
 | Sauce anglaise    | 1/4 cac max |
 | Sel, poivre       | 1 pincée    |
 | Tabasco           | 1/2 cac max |
+
+# Préparation
+- Déposer la **viande hachée** dans l'assiette en lui donnant une forme de demie-sphère
+- Posez le **jaune d'oeuf** dans un creux que vous aurez fait au sommet du steak
+- Ajouter ensuite les **câpres** et les **cornichons** préalablement hachés autour du steak dans la disposition qui vous plait
+- Faites de même pour l'**oignon** (ou l'**échalote**) finement émincé
+- Ajoutez le **tabasco** si vous aimez cela, mais gradez à l'esprit qu'il joue aussi un rôle de désinfectant qu'il ne faut surtout pas négliger lorsque vous utilisez une viande dont vous ne connaissez pas l'origine.
+- Selon vos goûts vous pouvez ajouter la sauce anglaise (**Worcestershire**), mais faites attention à ne pas trop en abuser car au delas d'une demie-cuillière à café pour 200 grammes de viande cela donne un goût amer et trop salé.
+- Assaisonnez
+- Mélangez votre steak jusqu'à avoir un résultat homogène
+- Ajoutez le trait d'**huile d'olive** qui lubrifiera bien la viande, si vous souhaitez mettre de la **moutarde** vous pouvez le faire maintenant.
+- Mélangez à nouveau, et c'est prêt !
 
