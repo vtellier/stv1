@@ -17,6 +17,20 @@ We offer you to prepare as described below, but you are of course free to procee
 
 If you really want to make it fast, you should probably go for the _american tartar_, this one has been designed to be as fast as possible as well as impossible to fail.
 
+# Ingredients
+
+| Ingrédient	       | Quantité         |
+| -------------------- | ---------------- |
+| Ground beef          | 200gr            |
+| Capers 	           | 1 to 2 teaspoon  |
+| Pickles              | 1 to 3           |
+| Shallot/oignon       | 1/2 or 1/4       |
+| Olive oil	           | 1 dash           |
+| Egg yolki            | 1                |
+| Moustard             | 1 tablespoon     |
+| Worcestershire sauce | 1/4 teaspoon max |
+| Salt, pepper         | 1 pinch          |
+| Tabasco              | 1/2 teaspoon max |
 
 # Preparation
 - Put the **choped meat** in a plate in a circle form
