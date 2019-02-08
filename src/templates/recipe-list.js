@@ -18,14 +18,14 @@ export default ({ data, pageContext }) => {
     images = images.reduce((acc,curr) => {
         const path = curr.relativePath;
         const endName = '-cover' + curr.ext;
-        const id = '/' + path.substring(0, path.length - endName.length);
+        const id = '/' + path.substring(0, path.length - endName.length) + '/';
         acc[id] = curr;
         return acc;
     }, {});
 
     let recipes = data.recipes.edges.reduce((acc,curr) => {
         if(curr.node.context.locale === pageContext.locale) {
-            curr.image = images[curr.node.context.slug];
+            curr.image = images[curr.node.context.pathRegex];
             if(curr.image)
                 acc.push(curr);
         }
@@ -57,9 +57,9 @@ export const query = graphql`
                     canonical: {
                         eq: null
                     }
-                }
-                path: {
-                    regex: "/recipes/"
+                    pathRegex: {
+                        regex: "/recipes/"
+                    }
                 }
             }
         ) {
