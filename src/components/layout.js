@@ -10,12 +10,29 @@ class Layout extends React.PureComponent {
     state = {
         menuOpen: false
     };
+    merge = (allSitePage, allMarkdownRemark) => {
+        let pages = allSitePage.reduce((acc, curr) => {
+            acc[curr.context.pathDotLanguage] = { page:curr };
+            return acc;
+        },{});
+        pages = allMarkdownRemark.reduce((acc, curr) => {
+            if(acc[curr.fields.pathDotLanguage])
+                Object.assign(acc[curr.fields.pathDotLanguage], { md:curr });
+            else
+                acc[curr.fields.pathDotLanguage] = { md:curr };
+            return acc;
+        }, pages);
+
+        return pages;
+    };
     render = () => {
         let { children, pageContext } = this.props;
         let { menuOpen } = this.state;
         let template = ({ site, allSitePage, allMarkdownRemark, nonCanonical }) => {
             allSitePage = allSitePage.edges.map(n => n.node);
-            let menuData = allMarkdownRemark.edges.map(n => n.node);
+            allMarkdownRemark = allMarkdownRemark.edges.map(n => n.node);
+            let menuData = allMarkdownRemark;
+            let merged = this.merge(allSitePage, allMarkdownRemark);
 
             menuData = menuData.reduce((acc,curr) => {
                 acc[curr.fields.pathDotLanguage] = curr.frontmatter;
@@ -32,7 +49,6 @@ class Layout extends React.PureComponent {
                 }
                 return acc;
             },[]);
-
 
             return (
                 <>
@@ -93,7 +109,9 @@ class Layout extends React.PureComponent {
                             edges {
                                 node {
                                     fields { pathDotLanguage }
+                                    excerpt
                                     frontmatter {
+                                        title
                                         menuOrder
                                         menuText
                                         menuTitle

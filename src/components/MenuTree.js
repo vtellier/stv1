@@ -18,14 +18,18 @@ export class MenuRender extends React.PureComponent {
         return (
             <>
                 { p !== null && (
-                    <ListItem button onClick={() => this.onClick(p.path) }>
+                    <>
                         { typeof p === 'string' &&
-                            <span>{p}</span>
+                            <ListItem>
+                                <ListItemText>{p}</ListItemText>
+                            </ListItem>
                         }
                         { typeof p === 'object' &&
-                            <ListItemText> { p.menuData.menuText } </ListItemText>
+                            (<ListItem button onClick={() => this.onClick(p.path) }>
+                                <ListItemText> { p.menuData.menuText } </ListItemText>
+                            </ListItem>)
                         }
-                    </ListItem>
+                    </>
                 )}
                 { children.length > 0 && (
                     <>
