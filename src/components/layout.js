@@ -32,7 +32,7 @@ class Layout extends React.PureComponent {
             allSitePage = allSitePage.edges.map(n => n.node);
             allMarkdownRemark = allMarkdownRemark.edges.map(n => n.node);
             let menuData = allMarkdownRemark;
-            let merged = this.merge(allSitePage, allMarkdownRemark);
+            //let merged = this.merge(allSitePage, allMarkdownRemark);
 
             menuData = menuData.reduce((acc,curr) => {
                 acc[curr.fields.pathDotLanguage] = curr.frontmatter;

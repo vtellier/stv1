@@ -7,6 +7,8 @@ menuText: "Accueil"
 menuTitle: "Cliquez ici pour revenir vers la page d'accueil du site"
 ---
 
+# Bienvenue !
+
 Ce site est spécialisé en recettes de tartare de boeuf.
 
 Si c'est ce que vous cherchez, vous ne vous êtes pas trompé !
