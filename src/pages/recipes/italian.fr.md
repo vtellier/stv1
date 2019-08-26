@@ -7,9 +7,11 @@ menuText: "L'italien"
 menuTitle: "Une recette italienne ensolleillée"
 ---
 
-Cette recette venue tout droit d'Italie saura vous rappeller les saveures de la Méditerrannée. Dans le même style, nous vous recommandons de regarder aussi le steak tartare à [l'avocat et à la brousse](/fr/recettes/brousse-avocat "Jetez un oeil à cette recette").
+Cette recette venue tout droit d'Italie saura vous rappeller les saveures de la Méditerrannée. 
 
 **Avec l'huile d'olive, le parmesan est l'ingrédient principal** de cette recette, car c'est bien celui-ci qui donnera le côté Italien à votre met. Vous pouvez doser allègrement le parmesan selon vos goûts, mais ne négligez pas pour autant les autres ingrédients de base !
+
+Dans le même style, nous vous recommandons de regarder aussi le steak tartare à [l'avocat et à la brousse](/fr/recettes/brousse-avocat "Jetez un oeil à cette recette").
 
 # Ingrédients
 
