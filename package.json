@@ -4,7 +4,7 @@
   "description": "The best tartare receipes of the world!",
   "main": "script/deploy.js",
   "dependencies": {
-    "aws-sdk": "^2.373.0",
+    "aws-sdk": "^2.814.0",
     "dotenv": "^6.2.0"
   },
   "devDependencies": {
